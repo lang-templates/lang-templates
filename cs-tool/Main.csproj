@@ -3,7 +3,7 @@
     <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>
     <TargetFrameworks>net462</TargetFrameworks>
-    <AssemblyName>tool</AssemblyName>
+    <AssemblyName>PROGRAM</AssemblyName>
     <RootNamespace>Main</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>disable</Nullable>

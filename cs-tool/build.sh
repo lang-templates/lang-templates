@@ -3,7 +3,7 @@ set -uvx
 set -e
 cd "$(dirname "$0")"
 cwd=`pwd`
-name=tool
+name=PROGRAM
 rm -rf bin obj
 dotnet build -c Release
 cd bin/x64/Release/net462
