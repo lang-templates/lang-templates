@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
+
 //using System.Windows.Forms;
 using CommandLine;
 using static Global.EasyObject;
@@ -125,7 +127,8 @@ public static class Program
                             throw new Exception(String.Format("'{0}' already exists; please use -f to overwrite.", opt.OutputDir));
                         }
                         Directory.CreateDirectory(opt.OutputDir);
-                        CopyFilesRecursively(dirDict[name], opt.OutputDir);
+                        //CopyFilesRecursively(dirDict[name], opt.OutputDir);
+                        _ReplaceFilesRecursively(Path.GetFileName(opt.OutputDir), dirDict[name], opt.OutputDir);
                     }
                     break;
                 // ÉpÅ[ÉXé∏îs
@@ -219,5 +222,97 @@ public static class Program
         {
             File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
         }
+    }
+    public static bool IsBinary(byte[] bytes)
+    {
+        bool isBinary = false;
+        for (int i = 0; i < Math.Min(bytes.Length, 8000); i++)
+        {
+            if (bytes[i] == 0)
+            {
+                isBinary = true;
+                break;
+            }
+        }
+        return isBinary;
+    }
+    public static void Prepare(string dirPath)
+    {
+        //Echo(dirPath, "Prepare(dirPath)");
+        Directory.CreateDirectory(dirPath);
+    }
+    public static void PrepareForFile(string filePath)
+    {
+        //Echo(filePath, "PrepareForFile(filePath)");
+        Prepare(Path.GetDirectoryName(filePath)!);
+    }
+    public static void _ReplaceFilesRecursively(string programId, string sourcePath, string targetPath)
+    {
+        //Now Create all of the directories
+        foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+        {
+            Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+        }
+
+        //Copy all the files & Replaces any files with the same name
+        foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+        {
+            //File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            byte[] bytes = File.ReadAllBytes(newPath);
+            if (!IsBinary(bytes))
+            {
+                string text = Encoding.UTF8.GetString(bytes);
+                text = text.Replace("PROGRAM", programId);
+                bytes = Encoding.UTF8.GetBytes(text);
+            }
+            string relPath = GetRelativePath(sourcePath, newPath);
+            string writePath = Path.Combine(targetPath, relPath);
+            PrepareForFile(writePath);
+            File.WriteAllBytes(writePath, bytes);
+        }
+    }
+    /// <summary>
+    /// Creates a relative path from one file or folder to another.
+    /// </summary>
+    /// <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
+    /// <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
+    /// <returns>The relative path from the start directory to the end path.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="fromPath" /> or <paramref name="toPath" /> is <c>null</c>.</exception>
+    /// <exception cref="UriFormatException"></exception>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static string GetRelativePath(string fromPath, string toPath)
+    {
+        // https://stackoverflow.com/questions/275689/how-to-get-relative-path-from-absolute-path
+        if (string.IsNullOrEmpty(fromPath))
+        {
+            throw new ArgumentNullException("fromPath");
+        }
+        if (string.IsNullOrEmpty(toPath))
+        {
+            throw new ArgumentNullException("toPath");
+        }
+        Uri fromUri = new Uri(AppendDirectorySeparatorChar(fromPath));
+        Uri toUri = new Uri(AppendDirectorySeparatorChar(toPath));
+        if (fromUri.Scheme != toUri.Scheme)
+        {
+            return toPath;
+        }
+        Uri relativeUri = fromUri.MakeRelativeUri(toUri);
+        string relativePath = Uri.UnescapeDataString(relativeUri.ToString());
+        if (string.Equals(toUri.Scheme, Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
+        {
+            relativePath = relativePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+        }
+        return relativePath;
+    }
+    private static string AppendDirectorySeparatorChar(string path)
+    {
+        // Append a slash only if the path is a directory and does not have a slash.
+        if (!Path.HasExtension(path) &&
+            !path.EndsWith(Path.DirectorySeparatorChar.ToString()))
+        {
+            return path + Path.DirectorySeparatorChar;
+        }
+        return path;
     }
 }
