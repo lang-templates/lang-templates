@@ -3,6 +3,8 @@ QT += quick
 CONFIG += c++17
 CONFIG += console
 
+TARGET=PROGRAM
+
 SOURCES += \
         main.cpp \
         piechart.cpp
