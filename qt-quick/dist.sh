@@ -3,7 +3,7 @@ set -uvx
 set -e
 cd "$(dirname "$0")"
 cwd=`pwd`
-name=q5
+name=PROGRAM
 rm -rf $name.exe
 rm -rf tmp.dist
 mkdir -p tmp.dist
