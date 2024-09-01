@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.+'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    //implementation project(":java17")
+    //testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    // https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.win32.win32.x86_64
+    implementation 'org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.3'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+archivesBaseName = 'noname'
+
+application {
+    mainClass = 'app.Main'
+}
+
+shadowJar {
+    zip64 true
+}
+
+task shadowRun(type: JavaExec) {
+    group = 'application'
+    classpath = files(shadowJar.archiveFile)
+    //main = 'app.Main'
+    args = ['arg1', 'arg2']
+}
+shadowRun.dependsOn shadowJar
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams true
+        events 'started', 'skipped', 'passed', 'failed'
+        exceptionFormat 'full'
+    }
+}
