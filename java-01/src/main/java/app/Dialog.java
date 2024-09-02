@@ -99,6 +99,10 @@ public class Dialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		init();
+	}
+
+	private void init() {
 		textField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
