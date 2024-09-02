@@ -17,6 +17,8 @@ if [ `uname | grep -n CYGWIN` ]; then
   PS=";"
 elif [ `uname | grep -n Windows` ]; then
   PS=";"
+elif [ `uname | grep -n MSYS_NT` ]; then
+  PS=";"
 else
   PS=":"
 fi
