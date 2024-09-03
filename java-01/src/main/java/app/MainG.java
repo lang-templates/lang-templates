@@ -51,7 +51,7 @@ public class MainG extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] {100, 100};
-		gbl_contentPane.rowHeights = new int[] {83, 83, 40};
+		gbl_contentPane.rowHeights = new int[] {83, 40, 40};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JButton btnNewButton = new JButton("New button");
