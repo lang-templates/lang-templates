@@ -71,7 +71,6 @@ public class MainG extends JFrame {
 		gbc_lblNewLabel.gridy = 0;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 0;
@@ -80,7 +79,6 @@ public class MainG extends JFrame {
 		btnNewButton_1 = new JButton(" ボタン");
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_1.fill = GridBagConstraints.BOTH;
 		gbc_btnNewButton_1.gridx = 1;
 		gbc_btnNewButton_1.gridy = 1;
 		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
