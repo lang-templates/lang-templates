@@ -77,6 +77,11 @@ public class MainG extends JFrame {
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
 		btnNewButton_1 = new JButton(" ボタン");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new DirectoryTree().createAndShowGui();
+			}
+		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton_1.gridx = 1;
