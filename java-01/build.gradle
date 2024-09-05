@@ -37,7 +37,7 @@ shadowJar {
 }
 
 task run2(type: JavaExec) {
-    main = 'app.Main'
+    main = 'app.DirectoryTree'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']
