@@ -13,6 +13,7 @@ exewrap64 -o tmp.dist/$name.exe -i duke256.ico -t 17 build/libs/noname-all.jar
 #$JAVA_HOME/bin/jlink --compress=2 --add-modules java.base,java.desktop,java.prefs --output tmp.dist/jre-min
 exewrap64 -o tmp.dist/$name.exe -i duke256.ico -t 17 build/libs/noname-all.jar
 $JAVA_HOME/bin/jlink --compress=2 --add-modules java.base,\
+java.compiler,\
 java.datatransfer,\
 java.desktop,\
 java.instrument,\
@@ -34,4 +35,3 @@ java.transaction.xa,\
 java.xml,\
 java.xml.crypto \
 --output tmp.dist/jre-min
-
