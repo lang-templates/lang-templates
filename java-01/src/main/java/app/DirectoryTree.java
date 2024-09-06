@@ -80,6 +80,7 @@ public final class DirectoryTree extends JPanel {
   }
 
   public static void createAndShowGui() {
+    /*
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     } catch (UnsupportedLookAndFeelException ignored) {
@@ -88,6 +89,7 @@ public final class DirectoryTree extends JPanel {
       ex.printStackTrace();
       return;
     }
+    */
     JFrame frame = new JFrame("@title@");
     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     // frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
