@@ -37,5 +37,11 @@ public class MainStream3 {
     	// 文字列から変換
     	String str = "ABCDE";
     	IntStream strStream = str.chars();
+
+    	Stream.Builder<Integer> sb = Stream.builder();
+    	sb.add(10);
+    	sb.add(20);
+    	Stream<Integer> buildStream =sb.build();
+    	buildStream.forEach(System.out::println);
 	}
 }
