@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 public class MainG extends JFrame {
@@ -26,6 +27,14 @@ public class MainG extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		/*
+        //なんとなくNimbusを使う
+        try {
+            UIManager.setLookAndFeel(
+                    "javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ex) {
+        }
+        */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
