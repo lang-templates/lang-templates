@@ -50,6 +50,13 @@ task run2(type: JavaExec) {
     args = ['arg1', 'arg2©']
 }
 
+task run3(type: JavaExec) {
+    main = 'app.MainStream3'
+    group = 'application'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ['arg1', 'arg2©']
+}
+
 task shadowRun(type: JavaExec) {
     group = 'application'
     classpath = files(shadowJar.archiveFile)
