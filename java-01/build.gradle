@@ -57,6 +57,13 @@ task run3(type: JavaExec) {
     args = ['arg1', 'arg2©']
 }
 
+task runSample(type: JavaExec) {
+    main = 'sample.SwingWorkerSample'
+    group = 'application'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ['arg1', 'arg2©']
+}
+
 task shadowRun(type: JavaExec) {
     group = 'application'
     classpath = files(shadowJar.archiveFile)
