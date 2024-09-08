@@ -22,6 +22,7 @@ public final class DirectoryTree extends JPanel {
     FileSystemView fileSystemView = FileSystemView.getFileSystemView();
     DefaultMutableTreeNode root = new DefaultMutableTreeNode();
     DefaultTreeModel treeModel = new DefaultTreeModel(root);
+    /*
     Stream.of(fileSystemView.getRoots()).forEach(fileSystemRoot -> {
       DefaultMutableTreeNode node = new DefaultMutableTreeNode(fileSystemRoot);
       root.add(node);
@@ -30,6 +31,9 @@ public final class DirectoryTree extends JPanel {
           .map(DefaultMutableTreeNode::new)
           .forEach(node::add);
     });
+	*/
+    File repo = new File("D:\\.repo");
+    root.add(new DefaultMutableTreeNode(repo));
 
     JTree tree = new JTree(treeModel) {
       @Override public void updateUI() {

@@ -25,7 +25,7 @@ public class Dialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	
 	public String result = null;
-	private JTextField textField;
+	private JTextField txtAbc;
 	private JLabel lblNewLabel;
 	private JButton okButton;
 	private JButton cancelButton;
@@ -54,19 +54,20 @@ public class Dialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			textField = new JTextField();
-			textField.addPropertyChangeListener(new PropertyChangeListener() {
+			txtAbc = new JTextField();
+			txtAbc.setText("abc");
+			txtAbc.addPropertyChangeListener(new PropertyChangeListener() {
 				public void propertyChange(PropertyChangeEvent evt) {
 				}
 			});
-			textField.addKeyListener(new KeyAdapter() {
+			txtAbc.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
 				}
 			});
-			textField.setBounds(12, 10, 96, 19);
-			contentPanel.add(textField);
-			textField.setColumns(10);
+			txtAbc.setBounds(12, 10, 96, 22);
+			contentPanel.add(txtAbc);
+			txtAbc.setColumns(10);
 		}
 		
 		lblNewLabel = new JLabel("New label");
@@ -80,7 +81,7 @@ public class Dialog extends JDialog {
 				okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Dialog.this.result = "this is result!" + textField.getText();
+						Dialog.this.result = "this is result!" + txtAbc.getText();
 						Dialog.this.setVisible(false);
 					}
 				});
@@ -103,10 +104,10 @@ public class Dialog extends JDialog {
 	}
 
 	private void init() {
-		textField.getDocument().addDocumentListener(new DocumentListener() {
+		txtAbc.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				Dialog.this.lblNewLabel.setText(textField.getText());
+				Dialog.this.lblNewLabel.setText(txtAbc.getText());
 				if (Dialog.this.lblNewLabel.getText().length()==0)
 					okButton.setEnabled(false);
 				else
@@ -114,7 +115,7 @@ public class Dialog extends JDialog {
 			}
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				Dialog.this.lblNewLabel.setText(textField.getText());
+				Dialog.this.lblNewLabel.setText(txtAbc.getText());
 				if (Dialog.this.lblNewLabel.getText().length()==0)
 					okButton.setEnabled(false);
 				else
@@ -122,7 +123,7 @@ public class Dialog extends JDialog {
 			}
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				Dialog.this.lblNewLabel.setText(textField.getText());
+				Dialog.this.lblNewLabel.setText(txtAbc.getText());
 				if (Dialog.this.lblNewLabel.getText().length()==0)
 					okButton.setEnabled(false);
 				else
