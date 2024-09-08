@@ -15,6 +15,8 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
     // https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.win32.win32.x86_64
     implementation 'org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.3'
+    // https://jitpack.io/#java-system/qiita4j/2024.0909.0120
+    implementation 'com.github.java-system:qiita4j:2024.0909.0120'
 }
 
 java {
@@ -52,6 +54,13 @@ task run2(type: JavaExec) {
 
 task run3(type: JavaExec) {
     main = 'app.MainStream3'
+    group = 'application'
+    classpath = sourceSets.main.runtimeClasspath
+    args = ['arg1', 'arg2©']
+}
+
+task runQiita(type: JavaExec) {
+    main = 'qiita.Qiita01'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']
