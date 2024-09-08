@@ -1,19 +1,21 @@
-global using JavaCommons;
-global using JavaCommons.Json;
-global using JavaCommons.Json.Linq;
-global using JavaCommons.Windows;
-global using static JavaCommons.Util;
+//global using JavaCommons;
+//global using JavaCommons.Json;
+//global using JavaCommons.Json.Linq;
+//global using JavaCommons.Windows;
+//global using static JavaCommons.Util;
+global using Global;
+global using static Global.EasyObject;
 global using System.Linq;
 
 using System;
 using System.Collections.Specialized;
 using System.Net;
 
-internal static class Global
+internal static class Globals
 {
-    static Global()
+    static Globals()
     {
-        Util.Log("Initializing Global.");
+        Log("Initializing Global.");
     }
     public static string QIITA_TOKEN = null;
     public static QiitaAPI QIITA_API = new QiitaAPI();
@@ -34,7 +36,7 @@ internal class QiitaAPI
     }
     internal dynamic Execute(out Status status2, string url, NameValueCollection query = null)
     {
-        if (Global.QIITA_TOKEN == null)
+        if (Globals.QIITA_TOKEN == null)
         {
             throw new Exception("Please set Global.QIITA_TOKEN");
         }
@@ -43,12 +45,12 @@ internal class QiitaAPI
             WebClient wc = new WebClient();
             wc.Encoding = System.Text.Encoding.UTF8;
             if (query != null) wc.QueryString = query;
-            wc.Headers.Add("Authorization", "Bearer " + Global.QIITA_TOKEN);
+            wc.Headers.Add("Authorization", "Bearer " + Globals.QIITA_TOKEN);
             string json = wc.DownloadString(url);
             //var obj = Util.FromJson(json);
             status2 = new Status();
             SetResponceHeaders(status2, wc.__GetResponse());
-            return Util.FromJson(json);
+            return FromJson(json);
         }
         catch (WebException we)
         {

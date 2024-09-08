@@ -20,19 +20,19 @@ internal static class Program
             Sys.Console.WriteLine("using Sys.");
             // created:2011-09-16
             DateTime dt = new DateTime(2023, 10, 20);
-            Print(dt.ToString("yyyy-MM-dd"));
+            Echo(dt.ToString("yyyy-MM-dd"));
             DateTime startDt = new DateTime(2011, 9, 4);
             //WatitUntil(DateTime.Now.AddSeconds(5));
             //Print(Environment.Version.ToString(), "Runtime Version");
             //Print(Assembly.GetExecutingAssembly().GetName().Version.ToString(), "Assembly Version");
             //Print(args, "args");
             //Print(FullName(null));
-            global::Global.QIITA_TOKEN = Environment.GetEnvironmentVariable("READ_QIITA");
+            global::Globals.QIITA_TOKEN = Environment.GetEnvironmentVariable("READ_QIITA");
             while (dt >= startDt)
             {
                 ProcessDay(dt);
                 dt = dt.AddDays(-1);
-                Print(dt, "dt");
+                Echo(dt, "dt");
                 WatitUntil(DateTime.Now.AddSeconds(5));
             }
             //goto redo;
@@ -73,7 +73,7 @@ internal static class Program
                          ["per_page"] = 20.ToString(),
                      });
 #else
-            var list = Global.QIITA_API.Execute(
+            var list = Globals.QIITA_API.Execute(
                 out status,
                 "https://qiita.com/api/v2/items",
                  new NameValueCollection
@@ -83,8 +83,8 @@ internal static class Program
                      ["query"] = $"created:{key}"
                  });
 #endif
-            Print(status, "status");
-            Print(status.status_name, "status.status_name");
+            Echo(status, "status");
+            Echo(status.status_name, "status.status_name");
             //if (status.status_name != "OK") break;
             if (status.status_name == "Forbidden" && status.rate_remain == 0)
             {
@@ -103,11 +103,11 @@ internal static class Program
                 Print(FullName(list), "FullName(list)");
 #endif
             if (list == null) Environment.Exit(1);
-            Print(list.Count);
+            Echo(list.Count);
             //Print(list);
             long count = ProcessRequest(key, list);
             //long count = list.Count;
-            Print(count, "count");
+            Echo(count, "count");
             if (count <= 0) break;
             i++;
         }
@@ -134,37 +134,51 @@ internal static class Program
         Console.WriteLine("・・・処理を再開します。");
         Thread.Sleep(1000);
     }
-    internal static long ProcessRequest(string key, dynamic list)
+    internal static long ProcessRequest(string key, EasyObject list)
     {
         var db = TwitterCommon.GetTwitterDbConnection();
         using (db)
         {
             //var @Article = TwitterCommon.colArticle(db);
             db.BeginTransaction();
-            foreach (var x in list)
+            foreach (var x in list.AsList)
             {
-                ((JObject)x).Remove("body");
-                ((JObject)x).Remove("rendered_body");
-                x.Remove("coediting");
+                //((JObject)x).Remove("body");
+                x.AsDictionary.Remove("body");
+                //((JObject)x).Remove("rendered_body");
+                x.AsDictionary.Remove("rendered_body");
+                x.AsDictionary.Remove("coediting");
                 //Print(x);
-                x.user = x.user.id;
+                x.Dynamic.user = x.Dynamic.user.id;
                 List<string> tagList = new List<string>();
-                foreach (var tag in x.tags)
+                foreach (var tag in x.Dynamic.tags)
                 {
                     tagList.Add((string)tag.name);
                 }
                 //x.tags = FromObject(tagList);
-                x.tags = string.Join("|", tagList);
-                Print(x);
-                Print(x.title);
+                x.Dynamic.tags = string.Join("|", tagList);
+                Echo(x);
+                Echo(x.Dynamic.title);
 #if false
-                string article_json = ToJson(x);
-                var article = FromJson<Article>(article_json);
-#else
                 Article article = FromObject<Article>(x);
+#else
+                EasyObject articleObj = FromObject(x);
+                Echo(articleObj, "articleObje");
+                Article article = new Article();
+                article.id = articleObj.Dynamic.id;
+                article.key = articleObj.Dynamic.key;
+                article.user = articleObj.Dynamic.user;
+                article.url = articleObj.Dynamic.url;
+                article.title = articleObj.Dynamic.title;
+                article.comments_count = articleObj.Dynamic.comments_count;
+                article.likes_count = articleObj.Dynamic.likes_count;
+                article.stocks_count = articleObj.Dynamic.stocks_count;
+                article.created_at = DateTime.Parse((string)articleObj.Dynamic.created_at);
+                article.updated_at = DateTime.Parse((string)articleObj.Dynamic.updated_at);
+                article.tags = articleObj.Dynamic.tags;
 #endif
-                article.key = key;
-                Print(article);
+    article.key = key;
+                Echo(article);
                 //Func<Article, bool> wrapper = (n => n.id == article.id);
                 //var found = @Article.FindOne(x => x.id == article.id);
                 var recordList = from s in db.Table<Article>()
@@ -185,29 +199,28 @@ internal static class Program
     }
 }
 
-[JsonObject("Article")]
 internal class Article
 {
-    [JsonProperty] [PrimaryKey]
+    [PrimaryKey]
     public string id { get; set; }
-    [JsonProperty] [NotNull, Indexed]
+    [NotNull, Indexed]
     public string key { get; set; }
-    [JsonProperty] [NotNull, Indexed]
+    [NotNull, Indexed]
     public string user { get; set; }
-    [JsonProperty] [NotNull]
+    [NotNull]
     public string url { get; set; }
-    [JsonProperty] [NotNull]
+    [NotNull]
     public string title { get; set; }
-    [JsonProperty] [NotNull]
+    [NotNull]
     public long comments_count { get; set; }
-    [JsonProperty] [NotNull]
+    [NotNull]
     public long likes_count { get; set; }
-    [JsonProperty] [NotNull]
+    [NotNull]
     public long stocks_count { get; set; }
-    [JsonProperty] [NotNull, Indexed]
+    [NotNull, Indexed]
     public DateTime created_at { get; set; }
-    [JsonProperty] [NotNull, Indexed]
+    [NotNull, Indexed]
     public DateTime updated_at { get; set; }
-    [JsonProperty] [NotNull]
+    [NotNull]
     public string tags { get; set; }
 }
