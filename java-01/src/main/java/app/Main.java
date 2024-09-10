@@ -1,5 +1,7 @@
 package app;
 
+import system.Sys;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -13,14 +15,16 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Main.argsList = String.join(",", args);
         Path path = getApplicationPath(Main.class);
-        System.out.println("path=" + path);
+        //System.out.println("path=" + path);
+        Sys.echo(path, "path");
+        Sys.echo(path.toString(), "path.toString()");
         Path dir = path.getParent();
         System.out.println("dir=" + dir);
-        System.out.println(System.getProperty("file.encoding"));
-        System.out.println(System.getProperty("java.application.path"));
-        System.out.println(System.getProperty("java.application.name"));
-        System.out.println(System.getProperty("java.application.version"));
-        System.out.println(System.getProperty("java.application.startup"));
+        Sys.echo(System.getProperty("file.encoding"), "file.encoding");
+        Sys.echo(System.getProperty("java.application.path"), "java.application.path");
+        Sys.echo(System.getProperty("java.application.name"), "java.application.name");
+        Sys.echo(System.getProperty("java.application.version"), "java.application.version");
+        Sys.echo(System.getProperty("java.application.startup"), "java.application.startup");
         System.out.println("started!");
         //throw new Exception("test ex");
         app.MainG.main(args);

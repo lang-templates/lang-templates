@@ -16,7 +16,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.win32.win32.x86_64
     implementation 'org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.3'
     // https://jitpack.io/#java-system/qiita4j/2024.0909.0120
-    implementation 'com.github.java-system:qiita4j:2024.0909.0120'
+    //implementation 'com.github.java-system:qiita4j:2024.0909.0120'
+    // https://jitpack.io/#org.bitbucket.javacommons/java17-lib
+    implementation 'org.bitbucket.javacommons:java17-lib:2024.0911.0254'
 }
 
 java {
@@ -38,48 +40,48 @@ shadowJar {
     zip64 true
 }
 
-task run1(type: JavaExec) {
+tasks.register('run1', JavaExec) {
     main = 'app.MainStream1'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']
 }
 
-task run2(type: JavaExec) {
+tasks.register('run2', JavaExec) {
     main = 'app.MainStream2'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']
 }
 
-task run3(type: JavaExec) {
+tasks.register('run3', JavaExec) {
     main = 'app.MainStream3'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']
 }
 
-task runQiita(type: JavaExec) {
+tasks.register('runQiita', JavaExec) {
     main = 'qiita.Qiita01'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']
 }
 
-task runSample(type: JavaExec) {
+tasks.register('runSample', JavaExec) {
     main = 'sample.SwingWorkerSample'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']
 }
 
-task shadowRun(type: JavaExec) {
+tasks.register('runShadow1', JavaExec) {
     group = 'application'
     classpath = files(shadowJar.archiveFile)
     //main = 'app.Main'
     args = ['arg1', 'arg2']
 }
-shadowRun.dependsOn shadowJar
+runShadow1.dependsOn shadowJar
 
 test {
     useJUnitPlatform()
