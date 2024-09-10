@@ -75,14 +75,6 @@ tasks.register('runSample', JavaExec) {
     args = ['arg1', 'arg2©']
 }
 
-tasks.register('runShadow1', JavaExec) {
-    group = 'application'
-    classpath = files(shadowJar.archiveFile)
-    //main = 'app.Main'
-    args = ['arg1', 'arg2']
-}
-runShadow1.dependsOn shadowJar
-
 tasks.register('copy_assets') {
     group = 'shadow'
     project.delete(files("${buildDir}/libs/assets") {
@@ -95,6 +87,14 @@ tasks.register('copy_assets') {
     }
 }
 copy_assets.dependsOn shadowJar
+
+tasks.register('runShadow1', JavaExec) {
+    group = 'application'
+    classpath = files(shadowJar.archiveFile)
+    //main = 'app.Main'
+    args = ['arg1', 'arg2']
+}
+//runShadow1.dependsOn shadowJar
 runShadow1.dependsOn copy_assets
 
 test {
