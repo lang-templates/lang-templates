@@ -9,5 +9,5 @@ ls -ltr build/libs
 rm -rf win64.tmp
 rm -rf tmp.dist
 mkdir tmp.dist
-exewrap64 -o tmp.dist/$name.exe -i duke256.ico -t 17 build/libs/noname-all.jar
+exewrap64 -o tmp.dist/$name.exe -i duke256.ico -t 17 -v 1.0.0 build/libs/noname-all.jar
 cp -rp ~/cmd/java/jre-min tmp.dist/jre-min
