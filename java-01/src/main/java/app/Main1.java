@@ -6,7 +6,6 @@ import system.Sys;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +16,6 @@ import java.security.ProtectionDomain;
 public class Main1 {
     public static void main(String[] args) throws Exception {
         Path path = getApplicationPath(Main.class);
-        //System.out.println("path=" + path);
         Sys.echo(path, "path");
         Sys.echo(path.toString(), "path.toString()");
         Path file = Paths.get(path.getParent().toString() + "/assets/qiita-9ea0c8fd43b61b01a8da.json");

@@ -97,6 +97,15 @@ tasks.register('runShadow1', JavaExec) {
 //runShadow1.dependsOn shadowJar
 runShadow1.dependsOn copy_assets
 
+tasks.register('runShadow2', JavaExec) {
+    group = 'application'
+    main = 'app.Main2'
+    classpath = files(shadowJar.archiveFile)
+    args = ['arg1', 'arg2']
+}
+//runShadow2.dependsOn shadowJar
+runShadow2.dependsOn copy_assets
+
 test {
     useJUnitPlatform()
     testLogging {
