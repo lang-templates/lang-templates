@@ -1,8 +1,10 @@
 package app;
 
+//import org.apache.commons.io.IOUtils;
 import system.Dynamic;
 import system.Sys;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -20,7 +22,9 @@ public class Main1 {
         Sys.echo(path.toString(), "path.toString()");
         Path file = Paths.get(path.getParent().toString() + "/assets/qiita-9ea0c8fd43b61b01a8da.json");
         Dynamic qiitaObj = null;
-        String text = Files.readString(file, StandardCharsets.UTF_8);
+        //String text = Files.readString(file, StandardCharsets.UTF_8);
+        InputStream input = Main1.class.getResourceAsStream("/app/qiita-9ea0c8fd43b61b01a8da.json");
+        String text =  org.apache.commons.io.IOUtils.toString(input, StandardCharsets.UTF_8);
         qiitaObj = Dynamic.fromJson(text);
         qiitaObj
                 .remove("coediting")
