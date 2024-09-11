@@ -19,6 +19,9 @@ dependencies {
     //implementation 'com.github.java-system:qiita4j:2024.0909.0120'
     // https://jitpack.io/#org.bitbucket.javacommons/java17-lib
     implementation 'org.bitbucket.javacommons:java17-lib:2024.0911.0254'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+    implementation 'joda-time:joda-time:2.12.7'
+
 }
 
 java {
