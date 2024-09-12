@@ -63,7 +63,8 @@ shadowJar {
 launch4j {
     mainClassName = 'app.Main'
     icon = "${projectDir}/duke256.ico"
-    bundledJrePath = "./jre-min"
+    bundledJrePath = './jre-min'
+    downloadUrl = 'https://github.com/corretto/corretto-22/releases/latest'
 }
 
 tasks.register('run1', JavaExec) {
