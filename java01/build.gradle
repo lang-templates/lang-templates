@@ -28,8 +28,9 @@ dependencies {
 
 java {
     toolchain {
-        //languageVersion = JavaLanguageVersion.of(17)
-        languageVersion = JavaLanguageVersion.of(22)
+        languageVersion = JavaLanguageVersion.of(17)
+        //languageVersion = JavaLanguageVersion.of(19)
+        //languageVersion = JavaLanguageVersion.of(22)
     }
 }
 
@@ -38,8 +39,8 @@ java {
 // https://gluonhq.com/products/javafx/openjfx-17-release-notes/
 // https://gluonhq.com/products/javafx/openjfx-22-release-notes/
 javafx {
-    //version = '17.0.12'
-    version = '22.0.2'
+    version = '17.0.12'
+    //version = '22.0.2'
     modules = [ 'javafx.controls' ]
 }
 
