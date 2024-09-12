@@ -4,7 +4,7 @@ set -e
 cwd=`pwd`
 mkdir -p ~/cmd/java
 rm -rf ~/cmd/java/jre*
-$JAVA_HOME/bin/jlink --compress=2 --add-modules java.base,\
+$SW_ZULU22_JDK/bin/jlink --compress=2 --add-modules java.base,\
 java.compiler,\
 java.datatransfer,\
 java.desktop,\
