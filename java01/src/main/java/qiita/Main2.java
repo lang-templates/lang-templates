@@ -1,4 +1,4 @@
-package app;
+package qiita;
 
 import system.Dynamic;
 import system.Sys;
@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 public class Main2 {
     public static void main(String[] args) {
-        System.out.println("This is demo.Main");
+        Sys.println("This is qiita.Main2");
         var ary = Dynamic.fromJson("{\"$json\": [11, 22.0, 33]}");
         Sys.echo(ary, "ary");
         ary.remove(1);

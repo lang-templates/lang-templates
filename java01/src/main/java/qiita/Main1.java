@@ -1,6 +1,7 @@
-package app;
+package qiita;
 
 //import org.apache.commons.io.IOUtils;
+import app.Main;
 import system.Dynamic;
 import system.Sys;
 
@@ -9,7 +10,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.CodeSource;
