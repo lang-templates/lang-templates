@@ -1,15 +1,21 @@
 package demo;
 
-//import java.util.Calendar;
-import org.joda.time.*;
-import org.joda.time.format.PeriodFormatter;
-import org.joda.time.format.PeriodFormatterBuilder;
+//import org.joda.time.*;
+//import org.joda.time.format.PeriodFormatter;
+//import org.joda.time.format.PeriodFormatterBuilder;
 import system.Sys;
 
-class Cons {
-    public static void waitUntil(DateTime dt) {
-        var start = new DateTime();
-        PeriodFormatter formatter = new PeriodFormatterBuilder()
+class Sleeper {
+    public static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ignored) {
+            ;
+        }
+    }
+    public static void waitUntil(org.joda.time.DateTime dt) {
+        var start = new org.joda.time.DateTime();
+        var formatter = new org.joda.time.format.PeriodFormatterBuilder()
                 .appendYears()
                 .appendSuffix(" year", " years")
                 .appendSeparator(", ")
@@ -24,10 +30,10 @@ class Cons {
                 .toFormatter();
         String msg = "";
         while(true) {
-            var now = new DateTime();
-            Interval interval = null;
+            var now = new org.joda.time.DateTime();
+            org.joda.time.Interval interval = null;
             try {
-                interval = new Interval(now, dt);
+                interval = new org.joda.time.Interval(now, dt);
             } catch(IllegalArgumentException ex) {
                 break;
             }
@@ -43,66 +49,28 @@ class Cons {
                 System.err.flush();
                 msg = s;
             }
-            //if (diff <= 0) break;
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ignored) {
-                ;
-            }
+            Sleeper.sleep(100);
         }
         System.err.print("\r");
         System.err.print("\033[1F\33[K");
         System.err.print("Waiting...done (");
-        var elapsed = new Interval(start, new DateTime());
+        var elapsed = new org.joda.time.Interval(start, new org.joda.time.DateTime());
         System.err.print(elapsed.toPeriod().toString(formatter));
         System.err.print(").");
         System.err.println();
         System.err.flush();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ignored) {
-            ;
-        }
+        Sleeper.sleep(1000);
     }
 }
 
 public class WaitUntil {
     public static void main(String[] args) throws Exception {
         Sys.echo("hello");
-        var now = new DateTime();
-        //var dt = now.plusMinutes(2);
+        var now = new org.joda.time.DateTime();
         var dt = now.plusSeconds(15);
         Sys.echo(now, "now");
         Sys.echo(dt, "now");
-        Cons.waitUntil(dt);
-
-        //var c1 = Calendar.getInstance();
-        var dt1 = new DateTime();
-
-        PeriodFormatter daysHoursMinutes = new PeriodFormatterBuilder()
-                .appendDays()
-                .appendSuffix(" day", " days")
-                .appendSeparator(" and ")
-                .appendMinutes()
-                .appendSuffix(" minute", " minutes")
-                .appendSeparator(" and ")
-                .appendSeconds()
-                .appendSuffix(" second", " seconds")
-                .toFormatter();
-
-        for (int i=10; i>=0; i--) {
-            System.out.print("\r");
-            System.out.print("\033[1F\33[K");
-            System.out.flush();
-            var dt2 = new DateTime();
-            Interval interval1 = new Interval(dt1, dt2);
-            System.out.print(interval1.toPeriod().toString(daysHoursMinutes));
-            System.out.print(":");
-            System.out.print(interval1.getEndMillis()-interval1.getStartMillis());
-            //System.out.print(i);
-            System.out.flush();
-            Thread.sleep(1000);
-        }
-        System.out.println();
+        Sleeper.waitUntil(dt);
+        Sys.echo("Finished");
     }
 }
