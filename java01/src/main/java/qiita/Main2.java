@@ -95,8 +95,11 @@ public class Main2 {
                 .remove("body")
                 .remove("group")
                 .remove("organization_url_name")
+                .remove("page_views_count")
                 .remove("private")
+                .remove("reactions_count")
                 .remove("rendered_body")
+                .remove("slide")
                 .remove("team_membership")
         ;
         qiitaObj.put("user", qiitaObj.get("user").get("id"));
