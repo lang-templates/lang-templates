@@ -2,9 +2,9 @@
 set -uvx
 set -e
 cwd=`pwd`
-mkdir -p ~/cmd/java
-rm -rf ~/cmd/java/jre*
-$JAVA_HOME/bin/jlink --compress=2 --add-modules java.base,\
+rm -rf ./tmp.jre-min
+$JAVA_HOME/bin/jlink --compress=2 --add-modules \
+java.base,\
 java.compiler,\
 java.datatransfer,\
 java.desktop,\
@@ -26,4 +26,4 @@ java.sql.rowset,\
 java.transaction.xa,\
 java.xml,\
 java.xml.crypto \
---output ~/cmd/java/jre-min
+--output ./tmp.jre-min
