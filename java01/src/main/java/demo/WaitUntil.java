@@ -5,7 +5,7 @@ import system.Waiter;
 
 public class WaitUntil {
     public static void main(String[] args) throws Exception {
-        Sys.echo("hello");
+        Sys.println("hello");
         //var now = new org.joda.time.DateTime();
         //var dt = now.plusSeconds(15);
         var now = new java.util.Date();
@@ -16,6 +16,6 @@ public class WaitUntil {
         Sys.echo(now, "now");
         Sys.echo(dt, "now");
         Waiter.waitOnConsole(dt);
-        Sys.echo("Finished");
+        Sys.println("Finished");
     }
 }
