@@ -6,11 +6,9 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import system.Sys;
 
-class Console {
-    public static void hello() {
-        Sys.echo("hello from Console");
-    }
+class Cons {
     public static void waitUntil(DateTime dt) {
+        var start = new DateTime();
         PeriodFormatter formatter = new PeriodFormatterBuilder()
                 .appendYears()
                 .appendSuffix(" year", " years")
@@ -24,7 +22,7 @@ class Console {
                 .appendSeconds()
                 .appendSuffix(" second", " seconds")
                 .toFormatter();
-        //Sys.echo(dt);
+        String msg = "";
         while(true) {
             var now = new DateTime();
             Interval interval = null;
@@ -33,32 +31,50 @@ class Console {
             } catch(IllegalArgumentException ex) {
                 break;
             }
-            long diff = interval.getEndMillis() - interval.getStartMillis();
-            System.out.print("\r");
-            System.out.print("\033[1F\33[K");
-            //System.out.flush();
-            System.out.print(interval.toPeriod().toString(formatter));
-            System.out.flush();
-            if (diff <= 0) break;
+            var sb = new StringBuilder();
+            sb.append("Waiting...");
+            sb.append(interval.toPeriod().toString(formatter));
+            sb.append(" left.");
+            String s = sb.toString();
+            if (!s.equals(msg)) {
+                System.err.print("\r");
+                System.err.print("\033[1F\33[K");
+                System.err.print(s);
+                System.err.flush();
+                msg = s;
+            }
+            //if (diff <= 0) break;
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {
                 ;
             }
         }
-        System.out.println();
+        System.err.print("\r");
+        System.err.print("\033[1F\33[K");
+        System.err.print("Waiting...done (");
+        var elapsed = new Interval(start, new DateTime());
+        System.err.print(elapsed.toPeriod().toString(formatter));
+        System.err.print(").");
+        System.err.println();
+        System.err.flush();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ignored) {
+            ;
+        }
     }
 }
 
 public class WaitUntil {
     public static void main(String[] args) throws Exception {
         Sys.echo("hello");
-        Console.hello();
         var now = new DateTime();
-        var dt = now.plusMinutes(2);
+        //var dt = now.plusMinutes(2);
+        var dt = now.plusSeconds(15);
         Sys.echo(now, "now");
         Sys.echo(dt, "now");
-        Console.waitUntil(dt);
+        Cons.waitUntil(dt);
 
         //var c1 = Calendar.getInstance();
         var dt1 = new DateTime();
