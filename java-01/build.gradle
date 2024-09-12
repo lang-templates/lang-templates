@@ -13,16 +13,16 @@ dependencies {
     //implementation project(":java17")
     //testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation 'commons-io:commons-io:2.16.1'
     // https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.win32.win32.x86_64
     implementation 'org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.3'
     // https://jitpack.io/#java-system/qiita4j/2024.0909.0120
     //implementation 'com.github.java-system:qiita4j:2024.0909.0120'
     // https://jitpack.io/#org.bitbucket.javacommons/java17-lib
-    implementation 'org.bitbucket.javacommons:java17-lib:2024.0911.0254'
+    implementation 'org.bitbucket.javacommons:java17-lib:2024.0912.1735'
     // https://mvnrepository.com/artifact/joda-time/joda-time
-    implementation 'joda-time:joda-time:2.12.7'
-    // https://mvnrepository.com/artifact/commons-io/commons-io
-    implementation 'commons-io:commons-io:2.16.1'
+    //implementation 'joda-time:joda-time:2.12.7'
 }
 
 java {
