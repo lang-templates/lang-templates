@@ -18,7 +18,8 @@ import java.util.List;
 public class ORM {
     public static void main(String[] args) throws Exception {
         //String databaseUrl = "jdbc:h2:mem:account";
-        String databaseUrl = "jdbc:sqlite:test.db3";
+        String databaseUrl = "jdbc:h2:./test.h2";
+        //String databaseUrl = "jdbc:sqlite:test.db3";
         // create a connection source to our database
         ConnectionSource connectionSource =
                 new JdbcConnectionSource(databaseUrl);
