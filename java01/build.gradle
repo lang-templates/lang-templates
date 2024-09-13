@@ -2,12 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.+'
-    //id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'edu.sc.seis.launch4j' version '3.0.6'
-    // https://plugins.gradle.org/plugin/com.gluonhq.gluonfx-gradle-plugin
-    // Gluon Client Plugin https://docs.gluonhq.com/client/0.1.31/
-    // https://github.com/graalvm/graalvm-ce-builds/releases
-    //id "com.gluonhq.gluonfx-gradle-plugin" version "1.0.23"
 }
 
 repositories {
@@ -35,18 +30,6 @@ java {
     }
 }
 
-// Gluon Client Plugin https://docs.gluonhq.com/client/0.1.31/
-// OpenJFX時代のJDK選び - もしくはOpenJFX時代のアプリケーション配布 - JavaFX in the Box https://skrb.hatenablog.com/entry/2019/06/24/220639
-// https://gluonhq.com/products/javafx/openjfx-17-release-notes/
-// https://gluonhq.com/products/javafx/openjfx-22-release-notes/
-/*
-javafx {
-    version = '17.0.12'
-    //version = '22.0.2'
-    modules = [ 'javafx.controls' ]
-}
-*/
-
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = 'UTF-8'
 
@@ -58,6 +41,15 @@ application {
 
 shadowJar {
     zip64 true
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams true
+        events 'started', 'skipped', 'passed', 'failed'
+        exceptionFormat 'full'
+    }
 }
 
 launch4j {
@@ -132,12 +124,3 @@ tasks.register('runShadow2', JavaExec) {
 }
 //runShadow2.dependsOn shadowJar
 runShadow2.dependsOn copy_assets
-
-test {
-    useJUnitPlatform()
-    testLogging {
-        showStandardStreams true
-        events 'started', 'skipped', 'passed', 'failed'
-        exceptionFormat 'full'
-    }
-}

@@ -55,24 +55,12 @@ public class Dialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			txtAbc = new JTextField();
-			/*
-			txtAbc.setText("abc");
-			txtAbc.addPropertyChangeListener(new PropertyChangeListener() {
-				public void propertyChange(PropertyChangeEvent evt) {
-				}
-			});
-			txtAbc.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyPressed(KeyEvent e) {
-				}
-			});
-		    */
 			txtAbc.setBounds(12, 10, 96, 22);
 			contentPanel.add(txtAbc);
 			txtAbc.setColumns(10);
 		}
 		
-		lblNewLabel = new JLabel("New label");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(12, 39, 50, 13);
 		contentPanel.add(lblNewLabel);
 		{
