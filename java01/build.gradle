@@ -20,6 +20,12 @@ dependencies {
     //implementation 'org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.3'
     // https://jitpack.io/#org.bitbucket.javacommons/java17-lib
     implementation 'org.bitbucket.javacommons:java17-lib:2024.0913.0022.26'
+    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-jdbc
+    implementation 'com.j256.ormlite:ormlite-jdbc:6.1'
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    implementation 'com.h2database:h2:2.3.232'
+    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation 'org.xerial:sqlite-jdbc:3.46.1.0'
 }
 
 java {
