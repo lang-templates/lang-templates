@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.+'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
+    //id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'edu.sc.seis.launch4j' version '3.0.6'
     // https://plugins.gradle.org/plugin/com.gluonhq.gluonfx-gradle-plugin
     // Gluon Client Plugin https://docs.gluonhq.com/client/0.1.31/
