@@ -104,53 +104,55 @@ public final class DirectoryTree extends JPanel {
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
   }
-}
 
-class FolderSelectionListener implements TreeSelectionListener {
-  // private JFrame frame = null;
-  private final FileSystemView fileSystemView;
+  class FolderSelectionListener implements TreeSelectionListener {
+    // private JFrame frame = null;
+    private final FileSystemView fileSystemView;
 
-  protected FolderSelectionListener(FileSystemView fileSystemView) {
-    this.fileSystemView = fileSystemView;
-  }
-
-  @Override public void valueChanged(TreeSelectionEvent e) {
-    DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
-    File parent = (File) node.getUserObject();
-    if (!node.isLeaf() || !parent.isDirectory()) {
-      return;
+    protected FolderSelectionListener(FileSystemView fileSystemView) {
+      this.fileSystemView = fileSystemView;
     }
-    JTree tree = (JTree) e.getSource();
-    DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
-    new BackgroundTask(fileSystemView, parent) {
-      @Override protected void process(List<File> chunks) {
-        if (tree.isDisplayable() && !isCancelled()) {
-          chunks.stream().map(DefaultMutableTreeNode::new)
-              .forEach(child -> model.insertNodeInto(child, node, node.getChildCount()));
-          // model.reload(parent); // = model.nodeStructureChanged(parent);
-          // tree.expandPath(path);
-        } else {
-          cancel(true);
-        }
+
+    @Override public void valueChanged(TreeSelectionEvent e) {
+      DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
+      File parent = (File) node.getUserObject();
+      if (!node.isLeaf() || !parent.isDirectory()) {
+        return;
       }
-    }.execute();
+      JTree tree = (JTree) e.getSource();
+      DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+      new BackgroundTask(fileSystemView, parent) {
+        @Override protected void process(List<File> chunks) {
+          if (tree.isDisplayable() && !isCancelled()) {
+            chunks.stream().map(DefaultMutableTreeNode::new)
+                    .forEach(child -> model.insertNodeInto(child, node, node.getChildCount()));
+            // model.reload(parent); // = model.nodeStructureChanged(parent);
+            // tree.expandPath(path);
+          } else {
+            cancel(true);
+          }
+        }
+      }.execute();
+    }
   }
+
+  class BackgroundTask extends SwingWorker<String, File> {
+    private final FileSystemView fileSystemView;
+    private final File parent;
+
+    protected BackgroundTask(FileSystemView fileSystemView, File parent) {
+      super();
+      this.fileSystemView = fileSystemView;
+      this.parent = parent;
+    }
+
+    @Override public String doInBackground() {
+      Stream.of(fileSystemView.getFiles(parent, true))
+              .filter(File::isDirectory)
+              .forEach(this::publish);
+      return "done";
+    }
+  }
+
 }
 
-class BackgroundTask extends SwingWorker<String, File> {
-  private final FileSystemView fileSystemView;
-  private final File parent;
-
-  protected BackgroundTask(FileSystemView fileSystemView, File parent) {
-    super();
-    this.fileSystemView = fileSystemView;
-    this.parent = parent;
-  }
-
-  @Override public String doInBackground() {
-    Stream.of(fileSystemView.getFiles(parent, true))
-        .filter(File::isDirectory)
-        .forEach(this::publish);
-    return "done";
-  }
-}

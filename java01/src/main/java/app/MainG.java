@@ -22,6 +22,7 @@ public class MainG extends JFrame {
 	private JLabel lblNewLabel;
 	private JButton btnNewButton_1;
 	private JButton btnDialog;
+	private JButton btnNewButton_2;
 
 	/**
 	 * Launch the application.
@@ -85,18 +86,6 @@ public class MainG extends JFrame {
 		gbc_btnNewButton.gridy = 0;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
 		
-		btnNewButton_1 = new JButton(" ボタン");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new DirectoryTree().createAndShowGui();
-			}
-		});
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_1.gridx = 1;
-		gbc_btnNewButton_1.gridy = 1;
-		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
-		
 		btnDialog = new JButton("Dialog");
 		btnDialog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,6 +96,30 @@ public class MainG extends JFrame {
 				System.out.println(dialog.result);
 			}
 		});
+		
+		btnNewButton_1 = new JButton("DirectoryTree");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DirectoryTree.createAndShowGui();
+			}
+		});
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 0;
+		gbc_btnNewButton_1.gridy = 1;
+		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		btnNewButton_2 = new JButton("RepoTree");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RepoTree.createAndShowGui();
+			}
+		});
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton_2.gridx = 1;
+		gbc_btnNewButton_2.gridy = 1;
+		contentPane.add(btnNewButton_2, gbc_btnNewButton_2);
 		GridBagConstraints gbc_btnDialog = new GridBagConstraints();
 		gbc_btnDialog.gridx = 1;
 		gbc_btnDialog.gridy = 2;
