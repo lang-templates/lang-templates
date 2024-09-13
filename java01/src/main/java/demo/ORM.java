@@ -5,12 +5,14 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.DatabaseTable;
 import com.j256.ormlite.table.TableUtils;
 import system.Sys;
 
 import java.sql.SQLException;
+import java.util.concurrent.Callable;
 import java.util.List;
 
 public class ORM {
@@ -28,18 +30,22 @@ public class ORM {
         // if you need to create the 'accounts' table make this call
         TableUtils.createTableIfNotExists(connectionSource, Account.class);
 
-        //accountDao.deleteById("Jim Smith");/**/
-        try (CloseableWrappedIterable<Account> iterable
-                     = accountDao.getWrappedIterable()) {
-            iterable.forEach(account -> {
-                Sys.echo(account.getName());
-                try {
-                    accountDao.delete(account);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+        TransactionManager.callInTransaction(connectionSource, new Callable<Void>() {
+            public Void call() throws Exception {
+                try (CloseableWrappedIterable<Account> iterable
+                             = accountDao.getWrappedIterable()) {
+                    iterable.forEach(account -> {
+                        Sys.echo(account.getName());
+                        try {
+                            accountDao.delete(account);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
                 }
-            });
-        }
+                return null;
+            }
+        });
 
         // create an instance of Account
         String name = "Jim Smith";
@@ -53,7 +59,7 @@ public class ORM {
         // show its password
         System.out.println("Account: " + account2.getPassword());
 
-        List<Account> libraries = accountDao.queryBuilder()
+        List<Account> list = accountDao.queryBuilder()
                 .where()
                 .in("name", accountDao.queryBuilder()
                         .selectColumns("name")
@@ -61,8 +67,8 @@ public class ORM {
                         .having("count(*) > 0"))
                 .query();
 
-        libraries.stream().forEach((a) -> {
-                Sys.echo(a);
+        list.stream().forEach((a) -> {
+            Sys.echo(a, "a");
         });
 
         // close the connection source
