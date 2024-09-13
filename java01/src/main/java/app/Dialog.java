@@ -55,6 +55,7 @@ public class Dialog extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			txtAbc = new JTextField();
+			/*
 			txtAbc.setText("abc");
 			txtAbc.addPropertyChangeListener(new PropertyChangeListener() {
 				public void propertyChange(PropertyChangeEvent evt) {
@@ -65,6 +66,7 @@ public class Dialog extends JDialog {
 				public void keyPressed(KeyEvent e) {
 				}
 			});
+		    */
 			txtAbc.setBounds(12, 10, 96, 22);
 			contentPanel.add(txtAbc);
 			txtAbc.setColumns(10);
