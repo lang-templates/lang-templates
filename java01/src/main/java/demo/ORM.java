@@ -9,7 +9,9 @@ import com.j256.ormlite.misc.TransactionManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.DatabaseTable;
 import com.j256.ormlite.table.TableUtils;
+//import org.joda.time.DateTime;
 import system.Sys;
+import system.Waiter;
 
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
@@ -18,7 +20,7 @@ import java.util.List;
 public class ORM {
     public static void main(String[] args) throws Exception {
         //String databaseUrl = "jdbc:h2:mem:account";
-        String databaseUrl = "jdbc:h2:./test.h2";
+        String databaseUrl = "jdbc:h2:./test";
         //String databaseUrl = "jdbc:sqlite:test.db3";
         // create a connection source to our database
         ConnectionSource connectionSource =
@@ -44,6 +46,9 @@ public class ORM {
                         }
                     });
                 }
+                //var dt = new org.joda.time.DateTime();
+                //dt = dt.plusDays(1);
+                //Waiter.waitOnConsole(dt);
                 return null;
             }
         });
