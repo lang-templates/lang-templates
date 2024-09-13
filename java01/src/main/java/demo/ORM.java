@@ -11,6 +11,7 @@ import com.j256.ormlite.table.TableUtils;
 import system.Sys;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ORM {
     public static void main(String[] args) throws Exception {
@@ -52,6 +53,18 @@ public class ORM {
         // show its password
         System.out.println("Account: " + account2.getPassword());
 
+        List<Account> libraries = accountDao.queryBuilder()
+                .where()
+                .in("name", accountDao.queryBuilder()
+                        .selectColumns("name")
+                        .groupBy("password")
+                        .having("count(*) > 0"))
+                .query();
+
+        libraries.stream().forEach((a) -> {
+                Sys.echo(a);
+        });
+
         // close the connection source
         connectionSource.close();
     }
@@ -87,5 +100,13 @@ class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
