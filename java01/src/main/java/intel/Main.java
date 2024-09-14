@@ -10,7 +10,7 @@ public class Main extends JFrame {
     private JTextField textField1;
     private JButton clickMeButton;
     private JPanel mainPanel;
-    private JButton button1;
+    private JButton showDialogButton;
     private JButton button2;
     private JButton button3;
 
@@ -35,6 +35,14 @@ public class Main extends JFrame {
                     return;
                 }
                 JOptionPane.showMessageDialog(Main.this, "Hello " + firstName);
+            }
+        });
+        showDialogButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                var dlg = new Dialog();
+                dlg.setVisible(true);
+                Sys.echo(dlg.result, "dlg.result");
             }
         });
     }
