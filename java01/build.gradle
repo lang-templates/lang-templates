@@ -81,7 +81,7 @@ launch4j {
 }
 
 tasks.register('run1', JavaExec) {
-    main = 'app.MainStream1'
+    main = 'app.MainG_old'
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
     args = ['arg1', 'arg2©']

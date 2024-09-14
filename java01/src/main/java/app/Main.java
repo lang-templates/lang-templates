@@ -27,7 +27,7 @@ public class Main {
         Sys.echo(System.getProperty("java.application.startup"), "java.application.startup");
         System.out.println("started!");
         //throw new Exception("test ex");
-        app.MainG.main(args);
+        MainG_old.main(args);
     }
     public static Path getApplicationPath(Class<?> cls) throws URISyntaxException {
         ProtectionDomain pd = cls.getProtectionDomain();
