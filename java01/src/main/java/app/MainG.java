@@ -13,6 +13,7 @@ public class MainG extends JFrame {
     private JButton directoryTreeButton;
     private JButton repoTreeButton;
     private JButton ダイアログを表示Button;
+    private JLabel dialogResultLabel;
 
     public static void main(String[] args) {
         var frame = new MainG();
@@ -22,7 +23,7 @@ public class MainG extends JFrame {
         setContentPane(mainPanel);/**/
         setTitle("Simple GUI APP");/**/
         setDefaultCloseOperation(EXIT_ON_CLOSE);/**/
-        setSize(640, 480);/**/
+        setSize(400, 240);/**/
         setLocationRelativeTo(null);/**/
         setResizable(false);/**/
         showArgsButton.addActionListener(new ActionListener() {
@@ -51,6 +52,8 @@ public class MainG extends JFrame {
                 var dialog = new Dialog_old();
                 dialog.setVisible(true);
                 //System.out.println("dialog exited!");
+                MainG.this.dialogResultLabel.setText("[" + dialog.result + "]");
+                MainG.this.update(MainG.this.getGraphics());
                 Sys.echo(dialog.result, "dialog.result");
             }
         });
