@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainG extends JFrame {
+public class MainG extends system.JFrame {
     private JPanel mainPanel;
     private JButton showArgsButton;
     private JLabel labelShowArgs;
@@ -20,12 +20,7 @@ public class MainG extends JFrame {
         frame.setVisible(true);
     }
     public MainG() {
-        setContentPane(mainPanel);/**/
-        setTitle("Simple GUI APP");/**/
-        setDefaultCloseOperation(EXIT_ON_CLOSE);/**/
-        setSize(400, 240);/**/
-        setLocationRelativeTo(null);/**/
-        setResizable(false);/**/
+        setMainPanel(mainPanel, 400, 240, "Simple GUI APP");/**/
         showArgsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

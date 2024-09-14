@@ -5,7 +5,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.*;
 
-public class Dialog extends JDialog {
+public class Dialog extends system.JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -21,13 +21,10 @@ public class Dialog extends JDialog {
     }
 
     public Dialog() {
-        setContentPane(contentPane);
+        //setContentPane(contentPane);
+        setMainPanel(contentPane, 400, 200, "Dialog Sample");/**/
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        this.setTitle("Dialog Sample");
-        this.setLocationRelativeTo(null);/**/
-        this.setSize(640, 200);
-        this.setResizable(false);
         textField1.grabFocus();/**/
         textField1Label.setText("");/**/
         this.buttonOK.setEnabled(false);/**/
