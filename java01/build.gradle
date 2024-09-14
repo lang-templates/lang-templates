@@ -130,7 +130,7 @@ copy_assets.dependsOn shadowJar
 
 tasks.register('runShadow1', JavaExec) {
     group = 'application'
-    main = 'app.Main1'
+    main = 'demo.GUI01'
     classpath = files(shadowJar.archiveFile)
     args = ['arg1', 'arg2']
 }
