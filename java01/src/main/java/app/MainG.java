@@ -49,7 +49,7 @@ public class MainG extends JFrame {
         ダイアログを表示Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                var dialog = new Dialog_old();
+                var dialog = new Dialog();
                 dialog.setVisible(true);
                 //System.out.println("dialog exited!");
                 MainG.this.dialogResultLabel.setText("[" + dialog.result + "]");
