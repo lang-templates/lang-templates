@@ -7,10 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main extends JFrame {
-    private JLabel lblFirstName;
     private JTextField textField1;
     private JButton clickMeButton;
     private JPanel mainPanel;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
 
     public static void main(String[] args) {
         var frame = new Main();
