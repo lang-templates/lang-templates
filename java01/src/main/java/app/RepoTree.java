@@ -59,7 +59,7 @@ public final class RepoTree extends JPanel {
             }
         };
         tree.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        tree.setRootVisible(false);
+        tree.setRootVisible(true);
         // java - File Browser GUI - Stack Overflow
         // https://stackoverflow.com/questions/6182110/file-browser-gui
         tree.addTreeSelectionListener(new FolderSelectionListener(fileSystemView));

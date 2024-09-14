@@ -14,35 +14,22 @@ repositories {
 
 dependencies {
     // https://bitbucket.org/javacommons/java17-lib/src/main/
-    implementation 'org.bitbucket.javacommons:java17-lib:2024.0914.2233.43'
+    implementation 'org.bitbucket.javacommons:java17-lib:2024.0914.2304.23'
 
-    // ...
+    // https://mvnrepository.com/artifact/com.jetbrains.intellij.java/java-gui-forms-rt
     implementation "com.jetbrains.intellij.java:java-gui-forms-rt:+"
     //noinspection GradlePackageUpdate
     //implementation "com.jgoodies:forms:1.1-preview"
     // https://mvnrepository.com/artifact/com.jgoodies/jgoodies-forms
     implementation 'com.jgoodies:jgoodies-forms:1.9.0'
 
-
     // https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.win32.win32.x86_64
     //implementation 'org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:4.3'
-
     // https://mvnrepository.com/artifact/org.eclipse.platform/org.eclipse.swt.win32.win32.x86_64
     //implementation 'org.eclipse.platform:org.eclipse.swt.win32.win32.x86_64:3.127.0'
 
     //testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-
-    // https://mvnrepository.com/artifact/commons-io/commons-io
-    implementation 'commons-io:commons-io:2.16.1'
-    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-jdbc
-    implementation 'com.j256.ormlite:ormlite-jdbc:6.1'
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-    implementation 'org.slf4j:slf4j-simple:2.0.16'
-    // https://mvnrepository.com/artifact/com.h2database/h2
-    implementation 'com.h2database:h2:2.3.232'
-    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
-    implementation 'org.xerial:sqlite-jdbc:3.46.1.0'
 }
 
 java {
