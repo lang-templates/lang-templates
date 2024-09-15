@@ -17,6 +17,10 @@ import java.util.stream.Stream;
 public class FileSystemTree extends JTree {
     private FileSystemView fileSystemView;
 
+    public FileSystemView getFileSystemView() {
+        return this.fileSystemView;
+    }
+
     public FileSystemTree() {
         this((String[]) null);
     }
