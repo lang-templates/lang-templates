@@ -47,21 +47,9 @@ public class FileSystemTree extends JTree {
                 root.add(new DefaultMutableTreeNode(repo));
             });
         }
-
-    /*
-    File repo = new File("D:\\.repo");
-    root.add(new DefaultMutableTreeNode(repo));
-    */
-
-        /*
-        JTree tree = new JTree(treeModel) {
-        };
-        */
         this.setModel(treeModel);
         this.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         this.setRootVisible(false);
-        // java - File Browser GUI - Stack Overflow
-        // https://stackoverflow.com/questions/6182110/file-browser-gui
         this.addTreeSelectionListener(new FileSystemTree.FolderSelectionListener(fileSystemView));
         this.expandRow(0);
     }
