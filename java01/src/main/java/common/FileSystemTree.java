@@ -1,5 +1,7 @@
 package common;
 
+//import org.apache.commons.lang3.SystemUtils;
+
 import javax.swing.*;
 import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeSelectionEvent;
@@ -13,8 +15,7 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -32,21 +33,31 @@ public class FileSystemTree extends JTree {
     }
 
     public FileSystemTree(String dir) {
-        /*FileSystemView*/
-        fileSystemView = FileSystemView.getFileSystemView();
+        this.fileSystemView = FileSystemView.getFileSystemView();
         final DefaultMutableTreeNode root = (dir != null) ?
                 new DefaultMutableTreeNode(new File(dir)) :
                 new DefaultMutableTreeNode();
         DefaultTreeModel treeModel = new DefaultTreeModel(root);
         if (dir == null) {
-            Stream.of(fileSystemView.getRoots()).forEach(fileSystemRoot -> {
-                DefaultMutableTreeNode node = new DefaultMutableTreeNode(fileSystemRoot);
-                //root.add(node);
-                Stream.of(fileSystemView.getFiles(fileSystemRoot, true))
-                        .filter(File::isDirectory)
-                        .map(DefaultMutableTreeNode::new)
-                        .forEach(root::add);
-            });
+            if (org.apache.commons.lang3.SystemUtils.IS_OS_WINDOWS) {
+                Stream.of(fileSystemView.getRoots()).forEach(fileSystemRoot -> {
+                    DefaultMutableTreeNode node = new DefaultMutableTreeNode(fileSystemRoot);
+                    //root.add(node);
+                    Stream.of(fileSystemView.getFiles(fileSystemRoot, true))
+                            .filter(File::isDirectory)
+                            .map(DefaultMutableTreeNode::new)
+                            .forEach(root::add);
+                });
+            } else {
+                Stream.of(fileSystemView.getRoots()).forEach(fileSystemRoot -> {
+                    final DefaultMutableTreeNode node = new DefaultMutableTreeNode(fileSystemRoot);
+                    root.add(node);
+                    Stream.of(fileSystemView.getFiles(fileSystemRoot, true))
+                            .filter(File::isDirectory)
+                            .map(DefaultMutableTreeNode::new)
+                            .forEach(node::add);
+                });
+            }
         } else {
             Stream.of(fileSystemView.getFiles(new File(dir), true))
                     .filter(File::isDirectory)
@@ -117,29 +128,28 @@ public class FileSystemTree extends JTree {
         TreeModel model = tree.getModel();
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
 
-        // // Java 9:
-        // Collections.list(root.breadthFirstEnumeration()).stream()
-        //   .filter(DefaultMutableTreeNode.class::isInstance)
-        //   .map(DefaultMutableTreeNode.class::cast)
-        //   .takeWhile(node -> node.getLevel() <= 1)
-        //   .dropWhile(DefaultMutableTreeNode::isRoot)
-        //   .dropWhile(DefaultMutableTreeNode::isLeaf)
-        //   .map(DefaultMutableTreeNode::getPath)
-        //   .map(TreePath::new)
-        //   .forEach(tree::collapsePath);
+         // Java 9:
+         Collections.list(root.breadthFirstEnumeration()).stream()
+           .filter(DefaultMutableTreeNode.class::isInstance)
+           .map(DefaultMutableTreeNode.class::cast)
+           .takeWhile(node -> node.getLevel() <= 1)
+           .dropWhile(DefaultMutableTreeNode::isRoot)
+           .dropWhile(DefaultMutableTreeNode::isLeaf)
+           .map(DefaultMutableTreeNode::getPath)
+           .map(TreePath::new)
+           .forEach(tree::collapsePath);
 
-        // Java 9: Enumeration<TreeNode> e = root.breadthFirstEnumeration();
-        Enumeration<?> e = root.breadthFirstEnumeration();
-        while (e.hasMoreElements()) {
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.nextElement();
-            boolean isOverFirstLevel = node.getLevel() > 1;
-            if (isOverFirstLevel) { // Collapse only nodes in the first hierarchy
-                return;
-            } else if (node.isLeaf() || node.isRoot()) {
-                continue;
-            }
-            collapseNode(tree, node);
-        }
+//        Enumeration<?> e = root.breadthFirstEnumeration();
+//        while (e.hasMoreElements()) {
+//            DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.nextElement();
+//            boolean isOverFirstLevel = node.getLevel() > 1;
+//            if (isOverFirstLevel) { // Collapse only nodes in the first hierarchy
+//                return;
+//            } else if (node.isLeaf() || node.isRoot()) {
+//                continue;
+//            }
+//            collapseNode(tree, node);
+//        }
     }
 
     private static void collapseNode(JTree tree, DefaultMutableTreeNode node) {
