@@ -69,26 +69,26 @@ public class FileSystemTree extends JTree {
         this.setRootVisible(false);
         this.addTreeSelectionListener(new FileSystemTree.FolderSelectionListener(fileSystemView));
         this.expandRow(0);
-        this.addTreeWillExpandListener(new TreeWillExpandListener() {
-            private final AtomicBoolean isAdjusting = new AtomicBoolean();
-
-            @Override
-            public void treeWillExpand(TreeExpansionEvent e) { // throws ExpandVetoException {
-                // collapseAll(tree); // StackOverflowError when collapsing nodes below 2nd level
-                if (isAdjusting.get()) {
-                    return;
-                }
-                isAdjusting.set(true);
-                collapseFirstHierarchy(FileSystemTree.this);
-                FileSystemTree.this.setSelectionPath(e.getPath());
-                isAdjusting.set(false);
-            }
-
-            @Override
-            public void treeWillCollapse(TreeExpansionEvent e) { // throws ExpandVetoException {
-                // throw new ExpandVetoException(e, "Tree collapse cancelled");
-            }
-        });
+//        this.addTreeWillExpandListener(new TreeWillExpandListener() {
+//            private final AtomicBoolean isAdjusting = new AtomicBoolean();
+//
+//            @Override
+//            public void treeWillExpand(TreeExpansionEvent e) { // throws ExpandVetoException {
+//                // collapseAll(tree); // StackOverflowError when collapsing nodes below 2nd level
+//                if (isAdjusting.get()) {
+//                    return;
+//                }
+//                isAdjusting.set(true);
+//                collapseFirstHierarchy(FileSystemTree.this);
+//                FileSystemTree.this.setSelectionPath(e.getPath());
+//                isAdjusting.set(false);
+//            }
+//
+//            @Override
+//            public void treeWillCollapse(TreeExpansionEvent e) { // throws ExpandVetoException {
+//                // throw new ExpandVetoException(e, "Tree collapse cancelled");
+//            }
+//        });
     }
 
     @Override
@@ -122,39 +122,27 @@ public class FileSystemTree extends JTree {
         });
     }
 
-    private final AtomicBoolean isAdjusting = new AtomicBoolean();
-
-    public static void collapseFirstHierarchy(JTree tree) {
-        TreeModel model = tree.getModel();
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-
-         // Java 9:
-         Collections.list(root.breadthFirstEnumeration()).stream()
-           .filter(DefaultMutableTreeNode.class::isInstance)
-           .map(DefaultMutableTreeNode.class::cast)
-           .takeWhile(node -> node.getLevel() <= 1)
-           .dropWhile(DefaultMutableTreeNode::isRoot)
-           .dropWhile(DefaultMutableTreeNode::isLeaf)
-           .map(DefaultMutableTreeNode::getPath)
-           .map(TreePath::new)
-           .forEach(tree::collapsePath);
-
-//        Enumeration<?> e = root.breadthFirstEnumeration();
-//        while (e.hasMoreElements()) {
-//            DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.nextElement();
-//            boolean isOverFirstLevel = node.getLevel() > 1;
-//            if (isOverFirstLevel) { // Collapse only nodes in the first hierarchy
-//                return;
-//            } else if (node.isLeaf() || node.isRoot()) {
-//                continue;
-//            }
-//            collapseNode(tree, node);
-//        }
-    }
-
-    private static void collapseNode(JTree tree, DefaultMutableTreeNode node) {
-        tree.collapsePath(new TreePath(node.getPath()));
-    }
+//    private final AtomicBoolean isAdjusting = new AtomicBoolean();
+//
+//    public static void collapseFirstHierarchy(JTree tree) {
+//        TreeModel model = tree.getModel();
+//        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+//
+//         // Java 9:
+//         Collections.list(root.breadthFirstEnumeration()).stream()
+//           .filter(DefaultMutableTreeNode.class::isInstance)
+//           .map(DefaultMutableTreeNode.class::cast)
+//           .takeWhile(node -> node.getLevel() <= 1)
+//           .dropWhile(DefaultMutableTreeNode::isRoot)
+//           .dropWhile(DefaultMutableTreeNode::isLeaf)
+//           .map(DefaultMutableTreeNode::getPath)
+//           .map(TreePath::new)
+//           .forEach(tree::collapsePath);
+//    }
+//
+//    private static void collapseNode(JTree tree, DefaultMutableTreeNode node) {
+//        tree.collapsePath(new TreePath(node.getPath()));
+//    }
 
     class FolderSelectionListener implements TreeSelectionListener {
         // private JFrame frame = null;

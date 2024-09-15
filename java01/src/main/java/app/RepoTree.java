@@ -16,8 +16,8 @@ public class RepoTree extends system.JFrame  {
     }
 
     private void initTreePanel() {
-        //var tree = new FileSystemTree();
-        var tree = new FileSystemTree("D:\\.repo\\base14");
+        //var tree = new FileSystemTree("D:\\.repo\\base14");
+        var tree = new FileSystemTree("D:\\.repo");
         this.treePanel.add(new JScrollPane(tree));
     }
 
