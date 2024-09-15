@@ -5,10 +5,10 @@ cwd=`pwd`
 name=PROGRAM
 gradle shadowJar
 ls -ltr build/libs
-#cp -rp build/libs/noname-all.jar ./myapp.jar
 rm -rf tmp.dist64
 mkdir tmp.dist64
-exewrap64 \
+exewrap \
+  -A x64 \
   -g \
   -o tmp.dist64/$name.exe \
   -i duke256.ico \

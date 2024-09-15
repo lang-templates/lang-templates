@@ -7,7 +7,8 @@ gradle shadowJar
 ls -ltr build/libs
 rm -rf tmp.dist32
 mkdir tmp.dist32
-exewrap32 \
+exewrap \
+  -A x86 \
   -g \
   -o tmp.dist32/$name.exe \
   -i duke256.ico \
