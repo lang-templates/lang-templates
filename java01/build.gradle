@@ -30,7 +30,7 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
     // https://mvnrepository.com/artifact/com.microsoft.playwright/playwright
-    implementation 'com.microsoft.playwright:playwright:1.47.0'
+    //implementation 'com.microsoft.playwright:playwright:1.47.0'
 }
 
 java {
