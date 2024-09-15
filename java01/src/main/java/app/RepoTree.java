@@ -72,7 +72,7 @@ public final class RepoTree extends JPanel {
     }
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(DirectoryTree::createAndShowGui);
+        EventQueue.invokeLater(RepoTree::createAndShowGui);
     }
 
     public static void createAndShowGui() {
