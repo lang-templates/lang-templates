@@ -21,8 +21,8 @@ public class Dialog extends system.JDialog {
     }
 
     public Dialog() {
-        //setContentPane(contentPane);
-        setMainPanel(contentPane, 400, 200, "Dialog Sample");/**/
+        //setMainPanel(contentPane, 400, 200, "Dialog Sample");/**/
+        setMainPanel(contentPane, "Dialog Sample");/**/
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         textField1.grabFocus();/**/

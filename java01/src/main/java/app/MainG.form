@@ -53,18 +53,10 @@
       </component>
       <component id="66c56" class="javax.swing.JLabel" binding="dialogResultLabel">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="c46d5" class="javax.swing.JButton" binding="アイコン表示テストButton" default-binding="true">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="アイコン表示テスト"/>
+          <text value="ここにダイアログ結果を表示"/>
         </properties>
       </component>
       <component id="fc43a" class="javax.swing.JLabel" binding="ここに引数を表示Label">
@@ -73,6 +65,14 @@
         </constraints>
         <properties>
           <text value="ここに引数を表示"/>
+        </properties>
+      </component>
+      <component id="c46d5" class="javax.swing.JButton" binding="アイコン表示テストButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="アイコン表示テスト"/>
         </properties>
       </component>
     </children>

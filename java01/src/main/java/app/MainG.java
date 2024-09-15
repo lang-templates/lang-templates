@@ -21,7 +21,8 @@ public class MainG extends system.JFrame {
         frame.setVisible(true);
     }
     public MainG() {
-        setMainPanel(mainPanel, 400, 240, "Simple GUI APP");/**/
+        //setMainPanel(mainPanel, 400, 240, "Simple GUI APP");/**/
+        setMainPanel(mainPanel, "Simple GUI APP");/**/
         showArgsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
