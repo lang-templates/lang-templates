@@ -43,7 +43,10 @@ public class MainG extends system.JFrame {
         repoTreeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RepoTree.createAndShowGui();
+                //RepoTree_old.createAndShowGui();
+                var frame = new RepoTree();
+                frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                frame.setVisible(true);
             }
         });
         ダイアログを表示Button.addActionListener(new ActionListener() {

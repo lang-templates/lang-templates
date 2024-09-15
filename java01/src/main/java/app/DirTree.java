@@ -11,7 +11,6 @@ public class DirTree extends system.JFrame {
     private JPanel treePanel;
 
     public DirTree() {
-        //this.setMainPanel(mainPanel, 640, 480, "DirTree");
         this.setMainPanel(mainPanel, 360, 240, "DirTree");
         this.initTreePanel();
     }
