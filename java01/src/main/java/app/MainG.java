@@ -33,7 +33,10 @@ public class MainG extends system.JFrame {
         directoryTreeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DirectoryTree.createAndShowGui();
+                //DirectoryTree.createAndShowGui();
+                var frame = new DirTree();
+                frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                frame.setVisible(true);
             }
         });
         repoTreeButton.addActionListener(new ActionListener() {
