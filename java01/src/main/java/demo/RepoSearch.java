@@ -13,7 +13,7 @@ public class RepoSearch {
     public static void main(String[] args) {
         String dir = "D:\\.repo\\base14";
         final DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-        addDirectory(root, dir, false);
+        addDirectory(root, dir);
         DefaultTreeModel model = new DefaultTreeModel(root);
         //DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
 
@@ -24,13 +24,13 @@ public class RepoSearch {
                 .dropWhile(DefaultMutableTreeNode::isRoot)
                 //.dropWhile(DefaultMutableTreeNode::isLeaf)
                 .map(DefaultMutableTreeNode::getUserObject)
-                .map(File.class::cast)
                 .filter(x -> x != null)
+                .map(File.class::cast)
                 .map(File::getPath)
                 .forEach(System.out::println);
     }
 
-    private static void addDirectory(DefaultMutableTreeNode parent, String path, boolean isDummy) {
+    private static void addDirectory(DefaultMutableTreeNode parent, String path/*, boolean isDummy*/) {
 
         //! ディレクトリ直下のファイル一覧を取得する.
         path += "\\";
@@ -47,12 +47,15 @@ public class RepoSearch {
                 var node = new DefaultMutableTreeNode(file);
                 parent.add(node);
 
+                /*
                 //! サブディレクトリの存在チェックの場合は、1件検出した時点で処理を終了する.
                 if (isDummy) {
                     return;
                 }
+                */
+
                 //! サブディレクトリが存在するかどうかを調べる.
-                addDirectory(node, file.getPath(), isDummy);
+                addDirectory(node, file.getPath()/*, isDummy*/);
             }
         }
     }
