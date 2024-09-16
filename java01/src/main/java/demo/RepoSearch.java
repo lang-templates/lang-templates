@@ -1,5 +1,6 @@
 package demo;
 
+import common.DirModel;
 import system.Waiter;
 
 public class RepoSearch {

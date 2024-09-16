@@ -1,4 +1,4 @@
-package demo;
+package common;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -29,13 +29,17 @@ public class DirModel extends DefaultTreeModel {
         }
     }
     public List<File> getFileList() {
-        var root = (DefaultMutableTreeNode) this.getRoot();
-        return Collections.list(root.depthFirstEnumeration()).stream()
-                .filter(DefaultMutableTreeNode.class::isInstance)
-                .map(DefaultMutableTreeNode.class::cast)
-                .map(DefaultMutableTreeNode::getUserObject)
-                .filter(x -> x != null) // exclude root
-                .map(File.class::cast)
+//        var root = (DefaultMutableTreeNode) this.getRoot();
+//        return Collections.list(root.depthFirstEnumeration()).stream()
+//                .filter(DefaultMutableTreeNode.class::isInstance)
+//                .map(DefaultMutableTreeNode.class::cast)
+//                .map(DefaultMutableTreeNode::getUserObject)
+//                .filter(x -> x != null) // exclude root
+//                .map(File.class::cast)
+//                .toList();
+        var list = getPathList();
+        return list.stream()
+                .map(File::new)
                 .toList();
     }
     public List<String> getPathList() {
@@ -47,6 +51,7 @@ public class DirModel extends DefaultTreeModel {
                 .filter(x -> x != null) // exclude root
                 .map(File.class::cast)
                 .map(File::getPath)
+                .sorted()
                 .toList();
     }
 }
