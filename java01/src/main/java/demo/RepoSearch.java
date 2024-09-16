@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 public class RepoSearch {
     public static void main(String[] args) {
         String dir = "D:\\.repo\\base14";
+        //final DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File("C:\\"));
         final DefaultMutableTreeNode root = new DefaultMutableTreeNode();
         addDirectory(root, dir);
         DefaultTreeModel model = new DefaultTreeModel(root);
@@ -21,10 +22,10 @@ public class RepoSearch {
         Collections.list(root.depthFirstEnumeration()).stream()
                 .filter(DefaultMutableTreeNode.class::isInstance)
                 .map(DefaultMutableTreeNode.class::cast)
-                .dropWhile(DefaultMutableTreeNode::isRoot)
+                //.dropWhile(DefaultMutableTreeNode::isRoot)
                 //.dropWhile(DefaultMutableTreeNode::isLeaf)
                 .map(DefaultMutableTreeNode::getUserObject)
-                .filter(x -> x != null)
+                .filter(x -> x != null) // exclude root
                 .map(File.class::cast)
                 .map(File::getPath)
                 .forEach(System.out::println);
