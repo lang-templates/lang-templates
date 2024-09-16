@@ -11,7 +11,8 @@ public class RepoTree extends system.JFrame  {
     private JButton button2;
 
     public RepoTree() {
-        this.setMainPanel(mainPanel, 360, 480, "RepoTree");
+        //this.setMainPanel(mainPanel, 360, 480, "RepoTree");
+        this.setMainPanel(mainPanel, "RepoTree");
         this.initTreePanel();
     }
 
