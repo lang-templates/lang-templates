@@ -1,6 +1,7 @@
 package demo;
 
 import org.eclipse.swt.widgets.TreeItem;
+import system.Dynamic;
 import system.Sys;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -11,13 +12,12 @@ import java.util.stream.Stream;
 
 public class RepoSearch {
     public static void main(String[] args) {
-        String dir = "D:\\.repo\\base14";
-        //final DefaultMutableTreeNode root = new DefaultMutableTreeNode(new File("C:\\"));
-        final DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-        addDirectory(root, dir);
-        DefaultTreeModel model = new DefaultTreeModel(root);
-        //DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-
+        var stopWatch = new org.apache.commons.lang3.time.StopWatch();
+        stopWatch.start();
+        var model = new DirModel("D:\\.repo\\base14");
+        stopWatch.stop();
+        System.out.println(stopWatch.formatTime());
+        var root = (DefaultMutableTreeNode) model.getRoot();
         // Java 9:
         Collections.list(root.depthFirstEnumeration()).stream()
                 .filter(DefaultMutableTreeNode.class::isInstance)
