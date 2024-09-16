@@ -9,9 +9,9 @@ public class RepoSearch {
         var model = new DirModel("D:\\.repo\\base14");
         stopWatch.stop();
         System.out.println(stopWatch.formatTime());
-        var now = new org.joda.time.DateTime();
-        var dt = now.plusSeconds(5);
-        Waiter.waitOnConsole(dt);
+        //var now = new org.joda.time.DateTime();
+        //var dt = now.plusSeconds(5);
+        Waiter.waitOnConsole(5000);
         var list = model.getPathList();
         list.stream()
                 .forEach(System.out::println);

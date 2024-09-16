@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     // https://bitbucket.org/javacommons/java17-lib/src/main/
-    implementation 'org.bitbucket.javacommons:java17-lib:2024.0915.1337.00'
+    implementation 'org.bitbucket.javacommons:java17-lib:2024.0916.1659.42'
 
     // https://mvnrepository.com/artifact/com.jetbrains.intellij.java/java-gui-forms-rt
     implementation "com.jetbrains.intellij.java:java-gui-forms-rt:+"
