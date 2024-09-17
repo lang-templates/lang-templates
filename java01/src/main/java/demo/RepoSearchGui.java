@@ -1,5 +1,7 @@
 package demo;
 
+import common.DirModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -10,21 +12,28 @@ public class RepoSearchGui extends system.JFrame {
     private JTextField textField1;
     private JTable table1;
 
+    private DirModel dirModel = new DirModel("D:\\.repo.\\base14");
+
     public RepoSearchGui() {
         this.setMainPanel(mainPanel, "RepoSearchGui");
+        this.textField1.grabFocus();
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         // Create a couple of columns
-        model.addColumn("Col1");
-        model.addColumn("Col2");
+        model.addColumn("Path");
         // Append a row
-        model.addRow(new Object[]{"v1", "v2"});
+        //model.addRow(new Object[]{"v1", "v2"});
+        //model.addRow(new Object[]{"v1", "v2"});
         textField1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 while (model.getRowCount() > 0) {
                     model.removeRow(0);
                 }
-                model.addRow(new Object[]{"v1b", "v2b"});
+                var list = dirModel.filterByRegex(textField1.getText());
+                list.stream()
+                        .forEach(x -> {
+                            model.addRow(new Object[]{x});
+                        });
             }
         });
     }

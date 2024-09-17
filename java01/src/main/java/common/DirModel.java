@@ -29,20 +29,12 @@ public class DirModel extends DefaultTreeModel {
         }
     }
     public List<File> getFileList() {
-//        var root = (DefaultMutableTreeNode) this.getRoot();
-//        return Collections.list(root.depthFirstEnumeration()).stream()
-//                .filter(DefaultMutableTreeNode.class::isInstance)
-//                .map(DefaultMutableTreeNode.class::cast)
-//                .map(DefaultMutableTreeNode::getUserObject)
-//                .filter(x -> x != null) // exclude root
-//                .map(File.class::cast)
-//                .toList();
-        var list = getPathList();
+        var list = getPathList(false);
         return list.stream()
                 .map(File::new)
                 .toList();
     }
-    public List<String> getPathList() {
+    public List<String> getPathList(boolean forwardSlash) {
         var root = (DefaultMutableTreeNode) this.getRoot();
         return Collections.list(root.depthFirstEnumeration()).stream()
                 .filter(DefaultMutableTreeNode.class::isInstance)
@@ -51,7 +43,11 @@ public class DirModel extends DefaultTreeModel {
                 .filter(x -> x != null) // exclude root
                 .map(File.class::cast)
                 .map(File::getPath)
+                .map(x -> forwardSlash ? x.replaceAll("\\\\", "/") : x)
                 .sorted()
                 .toList();
+    }
+    public List<String> filterByRegex(String regex) {
+        return StringListFilter.filterByRegex(getPathList(true), regex);
     }
 }

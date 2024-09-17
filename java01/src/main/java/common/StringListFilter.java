@@ -1,6 +1,5 @@
-package demo;
+package common;
 
-import common.DirModel;
 import system.Sys;
 
 import java.util.ArrayList;
@@ -8,8 +7,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class RegexStringFilter {
-    public static List<String> filterStringsByRegex(List<String> inputList, String regex) {
+public class StringListFilter {
+    public static List<String> filterByRegex(List<String> inputList, String regex) {
         if (!regex.startsWith("^")) regex = ".*" + regex;
         if (!regex.endsWith(("$"))) regex = regex + ".*";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
@@ -18,13 +17,14 @@ public class RegexStringFilter {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> filterStringsBySubstring(List<String> inputList, String s) {
+    public static List<String> filterBySubstring(List<String> inputList, String s) {
         return inputList.stream()
                 .filter(str -> str.contains(s))
                 .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
+        // demo program
         List<String> inputList = new ArrayList<>(List.of(
                 "apple", "banana", "cherry", "date", "elderberry",
                 "fig", "grape", "honeydew", "kiwi", "lemon"
@@ -32,13 +32,13 @@ public class RegexStringFilter {
 
         String regex = "^[a-e].*$";  // a から e で始まる文字列にマッチ
 
-        List<String> filteredList = filterStringsByRegex(inputList, regex);
+        List<String> filteredList = filterByRegex(inputList, regex);
 
         System.out.println("Original list: " + inputList);
         System.out.println("Filtered list: " + filteredList);
 
         var model = new DirModel("D:\\.repo\\base14");
-        var list = model.getPathList();
+        var list = model.getPathList(true);
         list = list.stream()
                 .map(x -> x.replaceAll("\\\\", "/"))
                 .toList();
@@ -46,12 +46,12 @@ public class RegexStringFilter {
 //                .forEach((x) -> {
 //                    Sys.println(x);
 //                });
-        List<String> list2 = filterStringsByRegex(list, "/JAVA01$");
+        List<String> list2 = filterByRegex(list, "/JAVA01$");
         list2.stream()
                 .forEach((x) -> {
                     Sys.println("[list2] " + x);
                 });
-        List<String> list3 = filterStringsByRegex(list, "/java[^/.]+$");
+        List<String> list3 = filterByRegex(list, "/java[^/.]+$");
         list3.stream()
                 .forEach((x) -> {
                     Sys.println("[list3] " + x);

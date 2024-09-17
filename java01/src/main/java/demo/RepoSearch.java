@@ -13,7 +13,7 @@ public class RepoSearch {
         //var now = new org.joda.time.DateTime();
         //var dt = now.plusSeconds(5);
         Waiter.waitOnConsole(5000);
-        var list = model.getPathList();
+        var list = model.getPathList(true);
         list.stream()
                 .forEach(System.out::println);
     }
