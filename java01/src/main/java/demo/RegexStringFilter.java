@@ -51,7 +51,7 @@ public class RegexStringFilter {
                 .forEach((x) -> {
                     Sys.println("[list2] " + x);
                 });
-        List<String> list3 = filterStringsByRegex(list, "/java17-lib$");
+        List<String> list3 = filterStringsByRegex(list, "/java[^/.]+$");
         list3.stream()
                 .forEach((x) -> {
                     Sys.println("[list3] " + x);
