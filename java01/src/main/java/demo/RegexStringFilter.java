@@ -9,14 +9,16 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class RegexStringFilter {
-    public static List<String> filterStrings(List<String> inputList, String regex) {
+    public static List<String> filterStringsByRegex(List<String> inputList, String regex) {
+        if (!regex.startsWith("^")) regex = ".*" + regex;
+        if (!regex.endsWith(("$"))) regex = regex + ".*";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         return inputList.stream()
                 .filter(str -> pattern.matcher(str).matches())
                 .collect(Collectors.toList());
     }
 
-    public static List<String> filterStrings2(List<String> inputList, String s) {
+    public static List<String> filterStringsBySubstring(List<String> inputList, String s) {
         return inputList.stream()
                 .filter(str -> str.contains(s))
                 .collect(Collectors.toList());
@@ -30,7 +32,7 @@ public class RegexStringFilter {
 
         String regex = "^[a-e].*$";  // a から e で始まる文字列にマッチ
 
-        List<String> filteredList = filterStrings(inputList, regex);
+        List<String> filteredList = filterStringsByRegex(inputList, regex);
 
         System.out.println("Original list: " + inputList);
         System.out.println("Filtered list: " + filteredList);
@@ -44,12 +46,12 @@ public class RegexStringFilter {
 //                .forEach((x) -> {
 //                    Sys.println(x);
 //                });
-        List<String> list2 = filterStrings(list, ".+/JAVA01");
+        List<String> list2 = filterStringsByRegex(list, "/JAVA01$");
         list2.stream()
                 .forEach((x) -> {
                     Sys.println("[list2] " + x);
                 });
-        List<String> list3 = filterStrings(list, ".+/java17-lib");
+        List<String> list3 = filterStringsByRegex(list, "/java17-lib$");
         list3.stream()
                 .forEach((x) -> {
                     Sys.println("[list3] " + x);
