@@ -15,6 +15,7 @@ public class MainG extends system.JFrame {
     private JLabel dialogResultLabel;
     private JButton アイコン表示テストButton;
     private JLabel ここに引数を表示Label;
+    private JButton リポジトリ検索Button;
 
     public static void main(String[] args) {
         var frame = new MainG();
@@ -64,6 +65,14 @@ public class MainG extends system.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 var frame = new demo.GUI01();
+                frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                frame.setVisible(true);
+            }
+        });
+        リポジトリ検索Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                var frame = new app.RepoSearchGui();
                 frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
             }
