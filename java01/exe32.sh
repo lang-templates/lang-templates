@@ -12,7 +12,7 @@ exewrap \
   -g \
   -o tmp.dist32/$name.exe \
   -i duke256.ico \
-  -t 17 \
+  -t 11 \
   -v 1.0.0.0 -V 1.0.0.0 \
   -j build/libs/noname-all.jar
-cp -rp ~/cmd/java32/jre-17-32bit tmp.dist32/jre-17-32bit
+cp -rp ~/cmd/java32/jre-11-32bit tmp.dist32/jre-11-32bit

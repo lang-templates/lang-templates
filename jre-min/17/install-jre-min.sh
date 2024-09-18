@@ -5,7 +5,7 @@ cwd=`pwd`
 
 mkdir -p ~/cmd/java64
 rm -rf ~/cmd/java64/jre*
-"C:\Program Files\Zulu\zulu-11\bin\jlink.exe" \
+"C:\Program Files\Zulu\zulu-17\bin\jlink.exe" \
 --compress=2 \
 --add-modules java.base,\
 java.compiler,\
@@ -29,11 +29,11 @@ java.sql.rowset,\
 java.transaction.xa,\
 java.xml,\
 java.xml.crypto \
---output ~/cmd/java64/jre-11-64bit
+--output ~/cmd/java64/jre-17-64bit
 
 mkdir -p ~/cmd/java32
 rm -rf ~/cmd/java32/jre*
-"C:\Program Files (x86)\Zulu\zulu-11\bin\jlink.exe" \
+"C:\Program Files (x86)\Zulu\zulu-17\bin\jlink.exe" \
 --compress=2 \
 --add-modules java.base,\
 java.compiler,\
@@ -57,4 +57,4 @@ java.sql.rowset,\
 java.transaction.xa,\
 java.xml,\
 java.xml.crypto \
---output ~/cmd/java32/jre-11-32bit
+--output ~/cmd/java32/jre-17-32bit
