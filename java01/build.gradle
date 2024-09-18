@@ -61,6 +61,11 @@ test {
     }
 }
 
+javadoc {
+    options.charSet = 'UTF-8'
+    options.encoding = 'UTF-8'
+}
+
 launch4j {
     mainClassName = 'app.Main'
     icon = "${projectDir}/duke256.ico"

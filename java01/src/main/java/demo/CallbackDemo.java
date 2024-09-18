@@ -2,6 +2,14 @@ package demo;
 
 import system.Sys;
 
+/**
+ * HelloJavaは、HelloJavaを表示するクラスです。
+ * <pre>{@code
+ * StringBuilder sb = new StringBuilder();
+ * Formatter formatter = new Formatter(sb, Locale.US);
+ * }</pre>
+ * @author　アイオス哲郎
+ */
 public class CallbackDemo {
     int total = 0;
 

@@ -16,7 +16,7 @@ public class Main {
         Main.argsList = String.join(",", args);
         Path path = getApplicationPath(Main.class);
         //System.out.println("path=" + path);
-        Sys.echo(path, "path");
+        Sys.echo(path, "path(パス)");
         Sys.echo(path.toString(), "path.toString()");
         Path dir = path.getParent();
         System.out.println("dir=" + dir);
