@@ -41,7 +41,7 @@ public class StringListFilter {
         var list = model.getPathList(true);
         list = list.stream()
                 .map(x -> x.replaceAll("\\\\", "/"))
-                .toList();
+                .collect(Collectors.toList());
 //        list.stream()
 //                .forEach((x) -> {
 //                    Sys.println(x);

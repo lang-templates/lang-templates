@@ -5,6 +5,7 @@ import javax.swing.tree.DefaultTreeModel;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DirModel extends DefaultTreeModel {
     public DirModel(String dir) {
@@ -34,7 +35,7 @@ public class DirModel extends DefaultTreeModel {
         var list = getPathList(false);
         return list.stream()
                 .map(File::new)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<String> getPathList(boolean forwardSlash) {
@@ -48,7 +49,7 @@ public class DirModel extends DefaultTreeModel {
                 .map(File::getPath)
                 .map(x -> forwardSlash ? x.replaceAll("\\\\", "/") : x)
                 .sorted()
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<String> getPathListLevel1(boolean forwardSlash) {
@@ -63,7 +64,7 @@ public class DirModel extends DefaultTreeModel {
                 .map(File::getPath)
                 .map(x -> forwardSlash ? x.replaceAll("\\\\", "/") : x)
                 .sorted()
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<String> filterByRegex(String regex) {

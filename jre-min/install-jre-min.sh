@@ -28,7 +28,8 @@ java.sql,\
 java.sql.rowset,\
 java.transaction.xa,\
 java.xml,\
-java.xml.crypto \
+java.xml.crypto,\
+jdk.unsupported \
 --output ~/cmd/java64/jre-11-64bit
 
 mkdir -p ~/cmd/java32
@@ -56,5 +57,6 @@ java.sql,\
 java.sql.rowset,\
 java.transaction.xa,\
 java.xml,\
-java.xml.crypto \
+java.xml.crypto,\
+jdk.unsupported \
 --output ~/cmd/java32/jre-11-32bit
