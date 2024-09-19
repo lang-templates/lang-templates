@@ -38,6 +38,15 @@ public class DirModel extends DefaultTreeModel {
                 .collect(Collectors.toList());
     }
 
+    public String excludeNotNecessary(String x) {
+        if (x.contains("/cmd/")) return null;
+        if (x.contains("/tmp.")) return null;
+        if (x.contains(".tmp/")) return null;
+        if (x.contains("/tmp/")) return null;
+        if (x.contains("/java-swing-tips/")) return null;
+        return x;
+    }
+
     public List<String> getPathList(boolean forwardSlash) {
         var root = (DefaultMutableTreeNode) this.getRoot();
         return Collections.list(root.depthFirstEnumeration()).stream()
@@ -48,6 +57,8 @@ public class DirModel extends DefaultTreeModel {
                 .map(File.class::cast)
                 .map(File::getPath)
                 .map(x -> forwardSlash ? x.replaceAll("\\\\", "/") : x)
+                .map(x -> excludeNotNecessary(x))
+                .filter(x -> x != null) // exclude root
                 .sorted()
                 .collect(Collectors.toList());
     }
