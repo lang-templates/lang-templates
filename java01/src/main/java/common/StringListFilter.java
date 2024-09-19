@@ -8,16 +8,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringListFilter {
-    /**
-     * searchDbは、検索用のメソッドです。
-     * @param inputList　コネクションです。
-     * @param regex　入力フォームに入力された文字が入っています。
-     * @return 検索結果を格納したリストです。
-     */
     public static List<String> filterByRegex(List<String> inputList, String regex) {
-        if (!regex.startsWith("^")) regex = ".*" + regex;
-        if (!regex.endsWith(("$"))) regex = regex + ".*";
-        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(RegexTool.toPartialRegex(regex), Pattern.CASE_INSENSITIVE);
         return inputList.stream()
                 .filter(str -> pattern.matcher(str).matches())
                 .collect(Collectors.toList());
