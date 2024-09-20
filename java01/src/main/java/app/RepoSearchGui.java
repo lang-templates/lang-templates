@@ -51,7 +51,7 @@ public class RepoSearchGui extends system.JFrame {
                 while (model.getRowCount() > 0) {
                     model.removeRow(0);
                 }
-                var list = dirModel.filterByRegex(textField1.getText(), new DirModel.PathFilter() {
+                var list = dirModel.filterByRegex(textField1.getText(), true, new DirModel.PathFilter() {
                    @Override
                     public boolean filter(String path) {
                        if (path.contains("/build/")) return false;
@@ -64,6 +64,7 @@ public class RepoSearchGui extends system.JFrame {
                     }
                 });
                 list.stream()
+                        //.map(x -> x.replaceAll("\\\\", "/"))
                         .forEach(x -> {
                             model.addRow(new Object[]{x});
                         });

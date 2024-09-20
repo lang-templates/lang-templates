@@ -47,14 +47,14 @@ public class DirModel extends DefaultTreeModel {
                 .collect(Collectors.toList());
     }
 
-    public String excludeNotNecessary(String x) {
-        if (x.contains("/cmd/")) return null;
-        if (x.contains("/tmp.")) return null;
-        if (x.contains(".tmp/")) return null;
-        if (x.contains("/tmp/")) return null;
-        if (x.contains("/java-swing-tips/")) return null;
-        return x;
-    }
+//    public String excludeNotNecessary(String x) {
+//        if (x.contains("/cmd/")) return null;
+//        if (x.contains("/tmp.")) return null;
+//        if (x.contains(".tmp/")) return null;
+//        if (x.contains("/tmp/")) return null;
+//        if (x.contains("/java-swing-tips/")) return null;
+//        return x;
+//    }
 
     public List<String> getPathList(boolean forwardSlash) {
         return getPathList(forwardSlash, new PathFilter() {
@@ -75,9 +75,8 @@ public class DirModel extends DefaultTreeModel {
                 .map(File.class::cast)
                 .map(File::getPath)
                 .map(x -> forwardSlash ? x.replaceAll("\\\\", "/") : x)
-                //.map(x -> excludeNotNecessary(x))
                 .filter(x -> pathFilter.filter(x))
-                .filter(x -> x != null) // exclude root
+                //.filter(x -> x != null) // exclude root
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -97,8 +96,8 @@ public class DirModel extends DefaultTreeModel {
                 .collect(Collectors.toList());
     }
 
-    public List<String> filterByRegex(String regex) {
-        return filterByRegex(regex, new PathFilter() {
+    public List<String> filterByRegex(String regex, boolean forwardSlash) {
+        return filterByRegex(regex, forwardSlash, new PathFilter() {
             @Override
             public boolean filter(String path) {
                 return true;
@@ -106,8 +105,8 @@ public class DirModel extends DefaultTreeModel {
         });
     }
 
-    public List<String> filterByRegex(String regex, PathFilter pathFilter) {
-        return StringListFilter.filterByRegex(getPathList(true, pathFilter), regex);
+    public List<String> filterByRegex(String regex, boolean forwardSlash, PathFilter pathFilter) {
+        return StringListFilter.filterByRegex(getPathList(forwardSlash, pathFilter), regex);
     }
 
     public static interface PathFilter {
