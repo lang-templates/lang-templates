@@ -51,7 +51,18 @@ public class RepoSearchGui extends system.JFrame {
                 while (model.getRowCount() > 0) {
                     model.removeRow(0);
                 }
-                var list = dirModel.filterByRegex(textField1.getText());
+                var list = dirModel.filterByRegex(textField1.getText(), new DirModel.PathFilter() {
+                   @Override
+                    public boolean filter(String path) {
+                       if (path.contains("/build/")) return false;
+                       if (path.contains("/cmd/")) return false;
+                       if (path.contains("/tmp.")) return false;
+                       if (path.contains(".tmp/")) return false;
+                       if (path.contains("/tmp/")) return false;
+                       if (path.contains("/java-swing-tips/")) return false;
+                       return true;
+                    }
+                });
                 list.stream()
                         .forEach(x -> {
                             model.addRow(new Object[]{x});

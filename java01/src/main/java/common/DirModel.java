@@ -31,6 +31,15 @@ public class DirModel extends DefaultTreeModel {
         }
     }
 
+    public static void main(String[] args) {
+        var dirModel = new DirModel("D:\\.repo\\base14\\cmd");
+        var list = dirModel.getPathListLevel1(true);
+        list.stream()
+                .forEach(x -> {
+                    System.out.println(x);
+                });
+    }
+
     public List<File> getFileList() {
         var list = getPathList(false);
         return list.stream()
@@ -48,6 +57,15 @@ public class DirModel extends DefaultTreeModel {
     }
 
     public List<String> getPathList(boolean forwardSlash) {
+        return getPathList(forwardSlash, new PathFilter() {
+            @Override
+            public boolean filter(String path) {
+                return true;
+            }
+        });
+    }
+
+    public List<String> getPathList(boolean forwardSlash, DirModel.PathFilter pathFilter) {
         var root = (DefaultMutableTreeNode) this.getRoot();
         return Collections.list(root.depthFirstEnumeration()).stream()
                 .filter(DefaultMutableTreeNode.class::isInstance)
@@ -57,7 +75,8 @@ public class DirModel extends DefaultTreeModel {
                 .map(File.class::cast)
                 .map(File::getPath)
                 .map(x -> forwardSlash ? x.replaceAll("\\\\", "/") : x)
-                .map(x -> excludeNotNecessary(x))
+                //.map(x -> excludeNotNecessary(x))
+                .filter(x -> pathFilter.filter(x))
                 .filter(x -> x != null) // exclude root
                 .sorted()
                 .collect(Collectors.toList());
@@ -79,15 +98,19 @@ public class DirModel extends DefaultTreeModel {
     }
 
     public List<String> filterByRegex(String regex) {
-        return StringListFilter.filterByRegex(getPathList(true), regex);
+        return filterByRegex(regex, new PathFilter() {
+            @Override
+            public boolean filter(String path) {
+                return true;
+            }
+        });
     }
 
-    public static void main(String[] args) {
-        var dirModel = new DirModel("D:\\.repo\\base14\\cmd");
-        var list = dirModel.getPathListLevel1(true);
-        list.stream()
-                .forEach( x -> {
-                    System.out.println(x);
-        });
+    public List<String> filterByRegex(String regex, PathFilter pathFilter) {
+        return StringListFilter.filterByRegex(getPathList(true, pathFilter), regex);
+    }
+
+    public static interface PathFilter {
+        public boolean filter(String path);
     }
 }
