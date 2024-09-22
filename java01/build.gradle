@@ -81,7 +81,7 @@ googleJavaFormat {
 import com.github.sherter.googlejavaformatgradleplugin.GoogleJavaFormat
 import com.github.sherter.googlejavaformatgradleplugin.VerifyGoogleJavaFormat
 
-task format(type: GoogleJavaFormat) {
+tasks.register('format', GoogleJavaFormat) {
     source 'src/main'
     source 'src/test'
     include '**/*.java'
@@ -89,7 +89,7 @@ task format(type: GoogleJavaFormat) {
     //exclude '**/Java9*.java'
 }
 
-task verifyFormatting(type: VerifyGoogleJavaFormat) {
+tasks.register('verifyFormatting', VerifyGoogleJavaFormat) {
     source 'src/main'
     source 'src/test'
     include '**/*.java'
