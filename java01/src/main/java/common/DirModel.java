@@ -57,12 +57,7 @@ public class DirModel extends DefaultTreeModel {
 //    }
 
     public List<String> getPathList(boolean forwardSlash) {
-        return getPathList(forwardSlash, new PathFilter() {
-            @Override
-            public boolean filter(String path) {
-                return true;
-            }
-        });
+        return getPathList(forwardSlash, path -> true);
     }
 
     public List<String> getPathList(boolean forwardSlash, DirModel.PathFilter pathFilter) {
@@ -79,6 +74,17 @@ public class DirModel extends DefaultTreeModel {
                 //.filter(x -> x != null) // exclude root
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+
+    public List<String> getPathListReverse(boolean forwardSlash) {
+        return getPathListReverse(forwardSlash, path -> true);
+    }
+
+    public List<String> getPathListReverse(boolean forwardSlash, DirModel.PathFilter pathFilter) {
+        var list = getPathList(forwardSlash, pathFilter);
+        Collections.reverse(list);
+        return list;
     }
 
     public List<String> getPathListLevel1(boolean forwardSlash) {
