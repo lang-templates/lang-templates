@@ -5,6 +5,7 @@ plugins {
     id 'edu.sc.seis.launch4j' version '3.0.6'
     // https://github.com/File5/intellij-idea-guidesigner-plugin
     id 'io.github.file5.guidesigner' version '1.0.2'
+    id 'com.github.sherter.google-java-format' version '+'
 }
 
 repositories {
@@ -72,6 +73,26 @@ launch4j {
     bundledJrePath = './jre-min'
     downloadUrl = 'https://github.com/corretto/corretto-22/releases/latest'
 }
+
+import com.github.sherter.googlejavaformatgradleplugin.GoogleJavaFormat
+import com.github.sherter.googlejavaformatgradleplugin.VerifyGoogleJavaFormat
+
+task format(type: GoogleJavaFormat) {
+    source 'src/main'
+    source 'src/test'
+    include '**/*.java'
+    exclude '**/*Template.java'
+    exclude '**/Java9*.java'
+}
+
+task verifyFormatting(type: VerifyGoogleJavaFormat) {
+    source 'src/main'
+    include '**/*.java'
+    ignoreFailures true
+}
+
+[format]*.group = 'format'
+[verifyFormatting]*.group = 'format'
 
 tasks.register('run1', JavaExec) {
     main = 'app.MainG_old'
