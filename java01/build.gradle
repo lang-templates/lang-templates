@@ -74,6 +74,10 @@ launch4j {
     downloadUrl = 'https://github.com/corretto/corretto-22/releases/latest'
 }
 
+googleJavaFormat {
+    toolVersion = '1.23.0'
+}
+
 import com.github.sherter.googlejavaformatgradleplugin.GoogleJavaFormat
 import com.github.sherter.googlejavaformatgradleplugin.VerifyGoogleJavaFormat
 

@@ -2,6 +2,7 @@ package app;
 
 import java.util.Arrays;
 import java.util.List;
+
 // import java.util.function.Consumer;
 
 // https://atmarkit.itmedia.co.jp/ait/articles/1407/28/news023_3.html

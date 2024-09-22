@@ -8,7 +8,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-/** @author user */
+/**
+ * @author user
+ */
 public class JForm2 extends JFrame {
   public static void main(String[] args) {
     var form = new JForm2();

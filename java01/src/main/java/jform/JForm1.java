@@ -9,7 +9,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-/** @author user */
+/**
+ * @author user
+ */
 public class JForm1 extends JFrame {
   public static void main(String[] args) {
     var frame = new JForm1();
