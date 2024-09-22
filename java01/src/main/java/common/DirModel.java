@@ -97,12 +97,13 @@ public class DirModel extends DefaultTreeModel {
     }
 
     public List<String> filterByRegex(String regex, boolean forwardSlash) {
-        return filterByRegex(regex, forwardSlash, new PathFilter() {
-            @Override
-            public boolean filter(String path) {
-                return true;
-            }
-        });
+//        return filterByRegex(regex, forwardSlash, new PathFilter() {
+//            @Override
+//            public boolean filter(String path) {
+//                return true;
+//            }
+//        });
+        return filterByRegex(regex, forwardSlash, path -> true);
     }
 
     public List<String> filterByRegex(String regex, boolean forwardSlash, PathFilter pathFilter) {

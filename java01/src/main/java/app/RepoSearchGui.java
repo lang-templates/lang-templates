@@ -51,18 +51,15 @@ public class RepoSearchGui extends system.JFrame {
                 while (model.getRowCount() > 0) {
                     model.removeRow(0);
                 }
-                var list = dirModel.filterByRegex(textField1.getText(), true, new DirModel.PathFilter() {
-                   @Override
-                    public boolean filter(String path) {
-                       if (path.contains("/build/")) return false;
-                       if (path.contains("/cmd/")) return false;
-                       if (path.contains("/tmp.")) return false;
-                       if (path.contains(".tmp/")) return false;
-                       if (path.contains("/tmp/")) return false;
-                       if (path.contains("/java-swing-tips/")) return false;
-                       return true;
-                    }
-                });
+                var list = dirModel.filterByRegex(textField1.getText(), true, path -> {
+                    if (path.contains("/build/")) return false;
+                    if (path.contains("/cmd/")) return false;
+                    if (path.contains("/tmp.")) return false;
+                    if (path.contains(".tmp/")) return false;
+                    if (path.contains("/tmp/")) return false;
+                    if (path.contains("/java-swing-tips/")) return false;
+                    return true;
+                 });
                 list.stream()
                         //.map(x -> x.replaceAll("\\\\", "/"))
                         .forEach(x -> {
