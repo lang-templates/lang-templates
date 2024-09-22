@@ -1,11 +1,11 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '7.+'
-    id 'edu.sc.seis.launch4j' version '3.0.6'
+    id 'com.github.johnrengelman.shadow' version '+'
+    id 'com.github.sherter.google-java-format' version '+'
     // https://github.com/File5/intellij-idea-guidesigner-plugin
     id 'io.github.file5.guidesigner' version '1.0.2'
-    id 'com.github.sherter.google-java-format' version '+'
+    id 'edu.sc.seis.launch4j' version '3.0.6'
 }
 
 repositories {
@@ -81,13 +81,16 @@ task format(type: GoogleJavaFormat) {
     source 'src/main'
     source 'src/test'
     include '**/*.java'
-    exclude '**/*Template.java'
-    exclude '**/Java9*.java'
+    //exclude '**/*Template.java'
+    //exclude '**/Java9*.java'
 }
 
 task verifyFormatting(type: VerifyGoogleJavaFormat) {
     source 'src/main'
+    source 'src/test'
     include '**/*.java'
+    //exclude '**/*Template.java'
+    //exclude '**/Java9*.java'
     ignoreFailures true
 }
 
