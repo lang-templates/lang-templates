@@ -76,6 +76,7 @@ launch4j {
 
 googleJavaFormat {
     toolVersion = '1.23.0'
+    options style: 'AOSP'
 }
 
 import com.github.sherter.googlejavaformatgradleplugin.GoogleJavaFormat
