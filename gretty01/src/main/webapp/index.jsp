@@ -9,6 +9,7 @@
 
 <%
 out.println(new java.util.Date());
+out.println(out.getClass().toString());
 %>
 
 </body>

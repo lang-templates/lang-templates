@@ -33,6 +33,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.microsoft.playwright/playwright
     //implementation 'com.microsoft.playwright:playwright:1.47.0'
+
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    implementation 'org.jsoup:jsoup:1.18.1'
 }
 
 java {
