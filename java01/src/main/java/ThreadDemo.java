@@ -1,3 +1,6 @@
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 class MyThread extends Thread {
     private int count;
 
@@ -8,19 +11,25 @@ class MyThread extends Thread {
     @Override
     public void run() {
         for (int i = 0; i < this.count; i++) {
-            int total = ThreadDemo.total;
+            ThreadDemo.lock.lock();
             try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                ;
+                int total = ThreadDemo.total;
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    ;
+                }
+                total += 1;
+                ThreadDemo.total = total;
+            } finally {
+                ThreadDemo.lock.unlock();
             }
-            total += 1;
-            ThreadDemo.total = total;
         }
     }
 }
 
 public class ThreadDemo {
+    public static final Lock lock = new ReentrantLock(true);
     public static int total = 0;
 
     public static void main(String[] args) throws Exception {
