@@ -18,6 +18,8 @@ dependencies {
     implementation 'org.bitbucket.javacommons:java17-lib:2024.0919.0609.00'
     //testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    // https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2'
 }
 
 java {
@@ -32,8 +34,8 @@ compileTestJava.options.encoding = 'UTF-8'
 gretty {
     // supported values:
     // 'jetty7', 'jetty8', 'jetty9', 'jetty9.3', 'jetty9.4', 'tomcat7', 'tomcat8'
-    //servletContainer = 'jetty9'
-    // httpPort = 8081      // port を変更する場合
+    servletContainer = 'jetty9.4'
+    httpPort = 7777      // port を変更する場合
     contextPath = "/" // contextPath を変更する場合
 }
 
