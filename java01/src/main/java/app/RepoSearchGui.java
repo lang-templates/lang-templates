@@ -2,8 +2,6 @@ package app;
 
 import common.DirModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
@@ -14,15 +12,14 @@ public class RepoSearchGui extends system.JFrame {
     private JPanel tablePanel;
     private JPanel mainPanel;
 
-    private JTable table;
     // private DirModel dirModel = new DirModel("D:\\.repo.\\base14");
-    private DirModel dirModel = new DirModel("C:\\Windows");
+    private final DirModel dirModel = new DirModel("C:\\Windows");
 
     public RepoSearchGui() {
         this.setMainPanel(mainPanel, "RepoSearchGui");
         this.textField1.grabFocus();
         // セル編集不可
-        this.table =
+        JTable table =
                 new JTable(
                         new DefaultTableModel() {
                             @Override
@@ -30,10 +27,10 @@ public class RepoSearchGui extends system.JFrame {
                                 return false;
                             }
                         });
-        DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.addColumn("Path");
         // テーブルダブルクリック
-        this.table.addMouseListener(
+        table.addMouseListener(
                 new MouseAdapter() {
                     public void mousePressed(MouseEvent mouseEvent) {
                         JTable table = (JTable) mouseEvent.getSource();
@@ -46,36 +43,27 @@ public class RepoSearchGui extends system.JFrame {
                         }
                     }
                 });
-        this.tablePanel.add(new JScrollPane(this.table));
+        this.tablePanel.add(new JScrollPane(table));
 
         textField1.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        while (model.getRowCount() > 0) {
-                            model.removeRow(0);
-                        }
-                        var list =
-                                dirModel.filterByRegex(
-                                        textField1.getText(),
-                                        true,
-                                        (path, level) -> {
-                                            if (level >= 2) return false;
-                                            if (path.contains("/build/")) return false;
-                                            if (path.contains("/cmd/")) return false;
-                                            if (path.contains("/tmp.")) return false;
-                                            if (path.contains(".tmp/")) return false;
-                                            if (path.contains("/tmp/")) return false;
-                                            if (path.contains("/java-swing-tips/")) return false;
-                                            return true;
-                                        });
-                        list.stream()
-                                // .map(x -> x.replaceAll("\\\\", "/"))
-                                .forEach(
-                                        x -> {
-                                            model.addRow(new Object[] {x});
-                                        });
+                e -> {
+                    while (model.getRowCount() > 0) {
+                        model.removeRow(0);
                     }
+                    var list =
+                            dirModel.filterByRegex(
+                                    textField1.getText(),
+                                    true,
+                                    (path, level) -> {
+                                        if (level >= 2) return false;
+                                        if (path.contains("/build/")) return false;
+                                        if (path.contains("/cmd/")) return false;
+                                        if (path.contains("/tmp.")) return false;
+                                        if (path.contains(".tmp/")) return false;
+                                        if (path.contains("/tmp/")) return false;
+                                        return !path.contains("/java-swing-tips/");
+                                    });
+                    list.forEach(x -> model.addRow(new Object[] {x}));
                 });
     }
 

@@ -58,5 +58,9 @@ public class DirTree extends system.JFrame {
             // "::ネットワーク";
             DirTree.this.textField1.setText(path);
         }
+
+        public FileSystemView getFileSystemView() {
+            return fileSystemView;
+        }
     }
 }

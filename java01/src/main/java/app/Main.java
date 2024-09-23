@@ -3,6 +3,7 @@ package app;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.CodeSource;
@@ -20,7 +21,8 @@ public class Main {
         Sys.echo(path.toString(), "path.toString()");
         Path dir = path.getParent();
         System.out.println("dir=" + dir);
-        Sys.echo(System.getProperty("file.encoding"), "file.encoding");
+        // Sys.echo(System.getProperty("file.encoding"), "file.encoding");
+        Sys.echo(Charset.defaultCharset().displayName(), "file.encoding");
         Sys.echo(System.getProperty("java.application.path"), "java.application.path");
         Sys.echo(System.getProperty("java.application.name"), "java.application.name");
         Sys.echo(System.getProperty("java.application.version"), "java.application.version");
@@ -35,7 +37,6 @@ public class Main {
         CodeSource cs = pd.getCodeSource();
         URL location = cs.getLocation();
         URI uri = location.toURI();
-        Path path = Paths.get(uri);
-        return path;
+        return Paths.get(uri);
     }
 }
