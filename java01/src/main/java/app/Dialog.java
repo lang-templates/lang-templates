@@ -14,43 +14,13 @@ public class Dialog extends system.JDialog {
 
     public String result;
 
-    private void on_textField1_changed() {
-        this.textField1Label.setText(textField1.getText());
-        this.buttonOK.setEnabled(!this.textField1Label.getText().isEmpty());
-    }
-
     public Dialog() {
-        // setMainPanel(contentPane, 400, 200, "Dialog Sample");/**/
-        setMainPanel(contentPane, "Dialog Sample"); /**/
-        setModal(true);
+        //
+        setMainPanel(contentPane, "Dialog Sample");
+        // buttnOk, buttonCancel
         getRootPane().setDefaultButton(buttonOK);
-        textField1.grabFocus(); /**/
-        textField1Label.setText(""); /**/
-        this.buttonOK.setEnabled(false); /**/
-        textField1
-                .getDocument()
-                .addDocumentListener(
-                        new DocumentListener() {
-                            @Override
-                            public void insertUpdate(DocumentEvent e) {
-                                /*Dialog.this.*/ on_textField1_changed();
-                            }
-
-                            @Override
-                            public void removeUpdate(DocumentEvent e) {
-                                /*Dialog.this.*/ on_textField1_changed();
-                            }
-
-                            @Override
-                            public void changedUpdate(DocumentEvent e) {
-                                /*Dialog.this.*/ on_textField1_changed();
-                            }
-                        });
-
         buttonOK.addActionListener(e -> onOK());
-
         buttonCancel.addActionListener(e -> onCancel());
-
         // X をクリックしたとき、 onCancel() を呼ぶ
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(
@@ -59,30 +29,54 @@ public class Dialog extends system.JDialog {
                         onCancel();
                     }
                 });
-
         // ESCAPE で onCancel() を呼ぶ
         contentPane.registerKeyboardAction(
                 e -> onCancel(),
                 KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
                 JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        // textField1
+        textField1.grabFocus();
+        textField1Label.setText("");
+        this.buttonOK.setEnabled(false);
+        textField1
+                .getDocument()
+                .addDocumentListener(
+                        new DocumentListener() {
+                            @Override
+                            public void insertUpdate(DocumentEvent e) {
+                                on_textField1_changed();
+                            }
+
+                            @Override
+                            public void removeUpdate(DocumentEvent e) {
+                                on_textField1_changed();
+                            }
+
+                            @Override
+                            public void changedUpdate(DocumentEvent e) {
+                                on_textField1_changed();
+                            }
+                        });
     }
 
     private void onOK() {
-        // ここにコードを追加
         this.result = textField1.getText();
         dispose();
     }
 
     private void onCancel() {
-        // 必要に応じてここにコードを追加
         JOptionPane.showMessageDialog(this, "キャンセルされました");
         this.result = null;
         dispose();
     }
 
+    private void on_textField1_changed() {
+        this.textField1Label.setText(textField1.getText());
+        this.buttonOK.setEnabled(!this.textField1Label.getText().isEmpty());
+    }
+
     public static void main(String[] args) {
         Dialog dialog = new Dialog();
-        // dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
     }
