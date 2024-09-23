@@ -78,5 +78,5 @@ tasks.register('verifyFormatting', VerifyGoogleJavaFormat) {
     ignoreFailures true
 }
 
-[format]*.group = 'format'
-[verifyFormatting]*.group = 'format'
+[format]*.group = 'build'
+[verifyFormatting]*.group = 'build'
