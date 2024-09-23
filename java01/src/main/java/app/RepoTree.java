@@ -2,8 +2,9 @@ package app;
 
 import common.FileSystemTree;
 import javax.swing.*;
+import jc.swing.JCFrame;
 
-public class RepoTree extends system.JFrame {
+public class RepoTree extends JCFrame {
     private JPanel mainPanel;
     private JPanel treePanel;
     private JButton button1;

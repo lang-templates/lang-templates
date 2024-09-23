@@ -1,8 +1,9 @@
 package gui;
 
 import javax.swing.*;
+import jc.swing.JCFrame;
 
-public class GuiMain extends system.JFrame {
+public class GuiMain extends JCFrame {
     private JPanel mainPanel;
     private JButton OKButton;
     private JButton cancelButton;

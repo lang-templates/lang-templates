@@ -1,9 +1,10 @@
 package app;
 
 import javax.swing.*;
+import jc.swing.JCFrame;
 import system.Sys;
 
-public class MainG extends system.JFrame {
+public class MainG extends JCFrame {
     private JPanel mainPanel;
     private JButton showArgsButton;
     private JButton directoryTreeButton;

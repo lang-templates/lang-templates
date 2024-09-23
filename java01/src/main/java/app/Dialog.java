@@ -4,8 +4,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import jc.swing.JCDialog;
 
-public class Dialog extends system.JDialog {
+public class Dialog extends JCDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;

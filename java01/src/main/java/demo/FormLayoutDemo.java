@@ -1,8 +1,9 @@
 package demo;
 
 import javax.swing.*;
+import jc.swing.JCFrame;
 
-public class FormLayoutDemo extends system.JFrame {
+public class FormLayoutDemo extends JCFrame {
     private JButton button1;
     private JPanel panel1;
 

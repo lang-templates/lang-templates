@@ -7,9 +7,10 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultMutableTreeNode;
+import jc.swing.JCFrame;
 import system.Sys;
 
-public class DirTree extends system.JFrame {
+public class DirTree extends JCFrame {
     private JButton button1;
     private JButton button2;
     private JPanel mainPanel;

@@ -15,8 +15,11 @@ repositories {
 }
 
 dependencies {
+    // https://bitbucket.org/javacommons/jc-swing
+    implementation 'org.bitbucket.javacommons:jc-swing:2024.0924.0410.15'
+
     // https://bitbucket.org/javacommons/java17-lib/src/main/
-    implementation 'org.bitbucket.javacommons:java17-lib:2024.0919.0609.00'
+    implementation 'org.bitbucket.javacommons:java17-lib:2024.0924.0418.37'
 
     // https://mvnrepository.com/artifact/com.jetbrains.intellij.java/java-gui-forms-rt
     implementation "com.jetbrains.intellij.java:java-gui-forms-rt:+"
@@ -103,8 +106,8 @@ tasks.register('verifyFormatting', VerifyGoogleJavaFormat) {
     ignoreFailures true
 }
 
-[format]*.group = 'format'
-[verifyFormatting]*.group = 'format'
+[format]*.group = 'build'
+[verifyFormatting]*.group = 'build'
 
 tasks.register('run1', JavaExec) {
     main = 'app.MainG_old'

@@ -3,10 +3,11 @@ package demo;
 import java.awt.event.*;
 import java.util.List;
 import javax.swing.*;
+import jc.swing.JCFrame;
 import system.Sys;
 import system.Waiter;
 
-public class WaiterGui extends system.JFrame {
+public class WaiterGui extends JCFrame {
     private JPanel contentPane;
     private JButton スタートButton;
     private JTextField textField1;

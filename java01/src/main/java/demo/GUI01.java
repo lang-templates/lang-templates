@@ -1,8 +1,9 @@
 package demo;
 
 import javax.swing.*;
+import jc.swing.JCFrame;
 
-public class GUI01 extends system.JFrame {
+public class GUI01 extends JCFrame {
     private JPanel mainPanel;
 
     public static void main(String[] args) {

@@ -6,8 +6,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import jc.swing.JCFrame;
 
-public class RepoSearchGui extends system.JFrame {
+public class RepoSearchGui extends JCFrame {
     private JTextField textField1;
     private JPanel tablePanel;
     private JPanel mainPanel;
