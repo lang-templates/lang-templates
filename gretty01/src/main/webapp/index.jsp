@@ -1,7 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%!
 public String escape(String s) {
-  return org.apache.commons.lang3.StringEscapeUtils.escapeHtml4("<br />\n&amp;").replaceAll("\\n", "<br />");
+  return org.apache.commons.lang3.StringEscapeUtils
+    .escapeHtml4(s)
+    .replaceAll("\\r\\n", "\\n")
+    .replaceAll("\\r", "\\n")
+    .replaceAll("\\n", "<br />")
+    ;
 }
 %>
 <html>
