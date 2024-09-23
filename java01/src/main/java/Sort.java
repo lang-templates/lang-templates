@@ -17,12 +17,11 @@ public class Sort {
                 }
             }
             Arrays.sort(number);
-            for(int Max: number) {
+            for (int Max : number) {
                 System.out.println(Max);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 }

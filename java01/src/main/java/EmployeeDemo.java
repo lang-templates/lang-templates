@@ -12,10 +12,11 @@ public class EmployeeDemo {
         employeeList.add(new Employee("4", "Yoshida"));
         employeeList.add(new Employee("5", "Sawada"));
 
-        List<String> foundList = employeeList.stream()
-                .filter(i -> i.getId().equals("5"))
-                .map(Employee::getName)
-                .collect(Collectors.toList());
+        List<String> foundList =
+                employeeList.stream()
+                        .filter(i -> i.getId().equals("5"))
+                        .map(Employee::getName)
+                        .collect(Collectors.toList());
 
         if (foundList.stream().count() == 1) {
             String employeeName = foundList.get(0);
@@ -26,19 +27,24 @@ public class EmployeeDemo {
     public static class Employee {
         private String id;
         private String name;
+
         public Employee(String id, String name) {
             this.id = id;
             this.name = name;
         }
+
         public String getId() {
             return id;
         }
+
         public void setId(String id) {
             this.id = id;
         }
+
         public String getName() {
             return name;
         }
+
         public void setName(String name) {
             this.name = name;
         }

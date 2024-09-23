@@ -33,17 +33,17 @@ public class Dialog extends system.JDialog {
                         new DocumentListener() {
                             @Override
                             public void insertUpdate(DocumentEvent e) {
-                                /*Dialog.this.*/on_textField1_changed();
+                                /*Dialog.this.*/ on_textField1_changed();
                             }
 
                             @Override
                             public void removeUpdate(DocumentEvent e) {
-                                /*Dialog.this.*/on_textField1_changed();
+                                /*Dialog.this.*/ on_textField1_changed();
                             }
 
                             @Override
                             public void changedUpdate(DocumentEvent e) {
-                                /*Dialog.this.*/on_textField1_changed();
+                                /*Dialog.this.*/ on_textField1_changed();
                             }
                         });
 
