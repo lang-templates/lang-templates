@@ -4,6 +4,8 @@ plugins {
 	//id 'org.springframework.boot' version '3.3.4'
 	id 'org.springframework.boot' version '2.7.18'
 	id 'io.spring.dependency-management' version '1.1.6'
+    // https://github.com/sherter/google-java-format-gradle-plugin
+    id 'com.github.sherter.google-java-format' version '+'
 }
 
 group = 'jc.example'
@@ -15,6 +17,9 @@ java {
 		languageVersion = JavaLanguageVersion.of(11)
 	}
 }
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
 repositories {
 	mavenCentral()
@@ -34,3 +39,31 @@ tasks.named('test') {
 bootRun {
 	args += ["--server.port=7777"]
 }
+
+googleJavaFormat {
+    toolVersion = '1.23.0'
+    options style: 'AOSP'
+}
+
+import com.github.sherter.googlejavaformatgradleplugin.GoogleJavaFormat
+import com.github.sherter.googlejavaformatgradleplugin.VerifyGoogleJavaFormat
+
+tasks.register('format', GoogleJavaFormat) {
+    source 'src/main'
+    source 'src/test'
+    include '**/*.java'
+    //exclude '**/*Template.java'
+    //exclude '**/Java9*.java'
+}
+
+tasks.register('verifyFormatting', VerifyGoogleJavaFormat) {
+    source 'src/main'
+    source 'src/test'
+    include '**/*.java'
+    //exclude '**/*Template.java'
+    //exclude '**/Java9*.java'
+    ignoreFailures true
+}
+
+[format]*.group = 'build'
+[verifyFormatting]*.group = 'build'
